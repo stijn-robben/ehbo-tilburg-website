@@ -28,12 +28,7 @@ body {
     background-color: var(--color3) !important;
 }
 
-.text-secondary {
-    color: var(--color1) !important;
-    letter-spacing: 0px;
-    font-family: var(--font2);
-    font-size: 20px;
-}
+
 
 .navbar-nav p:hover{
     transition: 0.5s;
@@ -56,6 +51,12 @@ body {
     min-height: 100vh;
 }
 
+.bg-vereniging{
+    background-image: url(../img/vereniging.jpg);
+    background-size: cover;
+    min-height: 100vh;
+}
+
 .jumbotron-head {
     padding-top: 10rem;
     color:var(--color2);
@@ -63,11 +64,44 @@ body {
     font-family: var(--font1);
 }
 
-.jumbotron-text, .quote-text, .about-text{
+.jumbotron-text{
     padding-top:2rem;
     font-family: var(--font2) !important;
     color: var(--color2);
-    font-size: 22px;
+    font-size: 18px;
+}
+
+.h2-main {
+    color:var(--color1);
+    font-size:55px;
+    font-family: var(--font1);
+    
+    text-decoration: underline;
+    text-decoration-color: var(--color3);
+    text-underline-offset: 10px;
+}
+
+.h2-secondary {
+    color:var(--color2);
+    font-size:55px;
+    font-family: var(--font1);
+    
+    text-decoration: underline;
+    text-decoration-color: var(--color3);
+    text-underline-offset: 10px;
+}
+
+.text-main {
+    color:var(--color2);
+    font-size: 18px;
+    font-family: var(--font2);
+}
+
+.text-secondary {
+    color: var(--color1) !important;
+    letter-spacing: 0px;
+    font-family: var(--font2);
+    font-size: 18px;
 }
 
 .btn-primary {

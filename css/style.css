@@ -87,6 +87,22 @@ body {
     transition: 0.4s;
 }
 
+.btn-secondary {
+    font-family: var(--font2);
+    background-color: var(--color1);
+    border-color: var(--color1);
+    border-radius: 9999px;
+    font-size:18px;
+    border-width: 3px;
+    --bs-btn-active-border-color: var(--color1) !important;
+}
+
+.btn-secondary:hover{
+    background-color:var(--color2);
+    border-color: var(--color1);
+    transition: 0.4s;
+    color:var(--color1);
+}
 
 .btn-learn-more {
     padding-top: 3rem;
@@ -137,6 +153,6 @@ body {
 
 
 .bi-instagram:hover, .bi-twitter:hover, .bi-facebook:hover{
-    color:var(--color2);
+    color:var(--color3);
     transition: 0.4s;
 }

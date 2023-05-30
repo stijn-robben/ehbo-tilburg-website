@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+@font-face {
+    font-family: 'Headway';
+    src: url(../fonts/headway.ttf);
+}
+
+:root {
+    --font1: 'Headway';
+    --font2: 'Open Sans';
+    --color1: #013365;
+    --color2: #FCFBF4;
+    --color3: #F9E22A;
+    --color4: rgba(0, 0, 0, 0.6);
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    list-style: none;
+    scroll-behavior: smooth;
+    text-decoration: none;
+}
+
+.bg-yellow {
+    background-color: var(--color3) !important;
+}
+
+.text-secondary {
+    color: var(--color1) !important;
+    letter-spacing: 0px;
+    font-family: var(--font2);
+    font-size: 20px;
+}
+
+.navbar-nav p:hover{
+    transition: 0.5s;
+    color: var(--color3) !important;
+}
+
+.bi-list {
+    color: var(--color1);
+}
+
+.text-nav {
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+}
+
+
+.bg-jumbotron {
+    background-image: url(../img/banner.jpg);
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.jumbotron-head {
+    padding-top: 10rem;
+    color:var(--color2);
+    font-size:80px;
+    font-family: var(--font1);
+}
+
+.jumbotron-text, .quote-text, .about-text{
+    padding-top:2rem;
+    font-family: var(--font2) !important;
+    color: var(--color2);
+    font-size: 22px;
+}
+
+.btn-primary {
+    font-family: var(--font2);
+    background-color: var(--color1);
+    border-color: var(--color3);
+    border-radius: 9999px;
+    font-size:22px;
+    border-width: 3px;
+    --bs-btn-active-bg: var(--color5) !important;
+    --bs-btn-active-border-color: var(--color1) !important;
+}
+
+.btn-primary:hover {
+    background-color:var(--color3);
+    border-color: var(--color1);
+    transition: 0.4s;
+}
+
+
+.btn-learn-more {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+
+.bg-dark-transparent {
+    background-color:var(--color4);
+}
+
+.lead {
+    font-family: var(--font2);
+    color: var(--color2);
+    font-size:22px;
+}
+
+
+
+.card {
+    --bs-card-border-width: 0px;
+}
+
+.card-title {
+    color: var(--color1);
+    font-family: var(--font1);
+}
+
+.card-text {
+    color: var(--color2);
+    font-family: var(--font2);
+}
+
+
+
+
+.bi-instagram, .bi-twitter, .bi-facebook {
+    color:var(--color1);
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    width: 40px; 
+    height: 40px;
+}
+
+.social-media {
+    padding-bottom: 1rem;
+    padding-top:25vh;
+}
+
+
+.bi-instagram:hover, .bi-twitter:hover, .bi-facebook:hover{
+    color:var(--color2);
+    transition: 0.4s;
+}

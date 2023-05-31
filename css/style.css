@@ -55,6 +55,12 @@ body {
     min-height: 100vh;
 }
 
+.bg-inloggen{
+    background-image: url(../img/inloggen.jpg);
+    background-size: cover;
+    min-height: 100vh;
+}
+
 .jumbotron-head {
     padding-top: 10rem;
     color:var(--color2);
@@ -107,7 +113,7 @@ body {
     background-color: var(--color1);
     border-color: var(--color3);
     border-radius: 9999px;
-    font-size:22px;
+    font-size:20px;
     border-width: 3px;
     --bs-btn-active-bg: var(--color5) !important;
     --bs-btn-active-border-color: var(--color1) !important;
@@ -184,7 +190,43 @@ body {
     transition: 0.4s;
 }
 
+.form-label {
+	
+	margin: 0;
+	display: block;
+	opacity: 1;
+	-webkit-transition: .333s ease top, .333s ease opacity;
+	transition: .333s ease top, .333s ease opacity;
+}
 
+.form-control {
+	border-radius: 0;
+	border-color: var(--color2);
+   	border-width: 0 0 2px 0;
+   	border-style: none none solid none;
+   	box-shadow: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border-color: var(--color3);
+}
+
+.js-hide-label {
+	opacity: 0; 	
+}
+
+.js-unhighlight-label {
+	color: var(--color2);
+}
+
+.login-form {
+    margin-left:20%;
+    margin-right:20%;
+    padding:3em;
+    background-color: #013365;
+    border-radius:1em;
+}
 
 .card {
     padding-top: 0.6em;

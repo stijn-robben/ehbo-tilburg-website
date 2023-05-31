@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Website van KNV EHBO Tilburg." />
+        <meta name="robots" content="index, follow" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+        <link rel="icon" type="image/x-icon" href="/img/s.png" />
+        <script defer src="./js/script.js"></script>
+        <title>EHBO Tilburg - Inloggen</title>
+    </head>
+    <body class="bg-light">
+        <div class="container pt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Inloggen</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="login.php" method="POST">
+                                Lidnummer: <input type="text" name="lidnummer" /> <br />
+                                Wachtwoord: <input type="password" name="wachtwoord" /> <br />
+                                <input type="submit" name="submit" value="Login" /> <br />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

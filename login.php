@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $lidnummer = $_POST['lidnummer'];
     $wachtwoord = $_POST['wachtwoord'];
     $host = 'localhost';
@@ -7,10 +7,11 @@ if(isset($_POST['submit'])){
     $pass = '';
     $dbname = 'ehbo-test';
     $conn = mysqli_connect($host, $user, $pass, $dbname);
-  
+
     $query = "SELECT * FROM gebruiker WHERE lidnummer = '$lidnummer' AND wachtwoord = '$wachtwoord'";
     $result = mysqli_query($conn, $query);
-    if(mysqli_num_rows($result) > 0) {
+
+    if (mysqli_num_rows($result) > 0) {
         // Gebruiker gevonden, toon gegevens op nieuwe pagina
         $row = mysqli_fetch_assoc($result);
         $wachtwoord = $row['wachtwoord'];

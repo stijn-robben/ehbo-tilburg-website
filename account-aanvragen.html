@@ -90,21 +90,28 @@
         <!--Login-->
         <div class="jumbotron bg-inloggen">
             <div class="container">
-                <p class="jumbotron-head h2-secondary">Inloggen</p>
+                <p class="jumbotron-head h2-secondary">Account aanvragen</p>
             </div>
             <div class="container pt-5">
-                <form id="contact-form" class="login-form" action="login.php" method="POST" role="form">
+                <form id="contact-form" class="login-form" action="register.php" method="POST" role="form">
                     <div class="form-group">
-                        <label class="form-label text-main" for="lidnummer">Lidnummer</label>
-                        <input type="text" class="form-control" id="lidnummer" name="lidnummer" placeholder="" required>
-                    </div>                            
+                        <label class="form-label text-main" for="firstname">Voornaam</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" required>
+                    </div>      
+                    <div class="form-group">
+                        <label class="form-label text-main pt-" for="lastname">Achternaam</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" required>
+                    </div>                        
+                    <div class="form-group">
+                        <label class="form-label text-main pt-" for="email">E-Mailadres</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="" required>
+                    </div>
                     <div class="form-group">
                         <label class="form-label text-main pt-3" for="wachtwoord">Wachtwoord</label>
                         <input type="password" class="form-control" id="wachtwoord" name="wachtwoord" placeholder="" required>
                     </div>
                     <div class="btn-message pt-3">
-                        <button class="btn btn-primary btn-lg" type="submit" name="submit">Inloggen</button>
-                        <a href="account-aanvragen.html" class="btn btn-primary btn-lg">Account aanvragen</a>
+                        <button class="btn btn-primary btn-lg" type="submit" name="submit">Account aanvragen</button>
                     </div>
                 </form>
             </div>

@@ -1,5 +1,4 @@
 <?php
-
     try{
         $dsn = "mysql: dbname=id19625723_ehbo; host=localhost";
         $user = "id19625723_root";

@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $wachtwoord = $_POST['wachtwoord'];
     $voornaam = $_POST['voornaam'];
     $achternaam = $_POST['achternaam'];
@@ -13,3 +13,12 @@ if(isset($_POST['submit'])){
     mysqli_query($conn, $sql);
 }
 ?>
+
+<!-- Controleer of het wachtwoord aan de vereisten voldoet met behulp van de regex
+    $password_regex = '/^(?=.*\d)(?=.*[!@#$%^&*])\S{8,}/';
+    if (!preg_match($password_regex, $wachtwoord)) {
+        echo "<h1>Inloggen mislukt</h1>";
+        echo "<p>
+        Ongeldig wachtwoord. Zorg ervoor dat je wachtwoord minimaal 8 tekens bevat, inclusief minimaal 1 cijfer en 1 speciaal teken.</p>";
+        return;
+    } -->

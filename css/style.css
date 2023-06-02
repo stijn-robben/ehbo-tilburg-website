@@ -33,6 +33,11 @@ body {
     color: var(--color3) !important;
 }
 
+.navbar-dropdown:hover{
+    transition: 0.5s;
+    color: var(--color3) !important;
+}
+
 .bi-list {
     color: var(--color1);
 }

@@ -73,21 +73,21 @@
                         </li>
 
                         <a class="nav-link" href="contact.html"><p class="text-secondary text-nav">Contact</p></a>
-
+                        <div class="pt-2">
+                            <a class="btn btn-secondary btn-lg" href="login.html" role="button">Inloggen</a>
+                        </div>
                         
 
                         
                     </div>
                 </div>
                 <div>
-                    <div>
-                        <a class="btn btn-secondary btn-lg" href="login.html" role="button">Inloggen</a>
-                    </div>
+                    
                     
                 </div>
             </div>
         </nav>
-        <!--Login-->
+        <!--Aanvragen-->
         <div class="jumbotron bg-inloggen">
             <div class="container">
                 <p class="jumbotron-head h2-secondary">Account aanvragen</p>
@@ -95,13 +95,10 @@
             <div class="container pt-5">
                 <form id="contact-form" class="login-form" action="register.php" method="POST" role="form">
                     <div class="form-group">
-                        <label class="form-label text-main" for="firstname">Voornaam</label>
+                        <label class="form-label text-main" for="firstname">Naam</label>
                         <input type="text" class="form-control" id="firstname" name="firstname" placeholder="" required>
                     </div>      
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="lastname">Achternaam</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="" required>
-                    </div>                        
+                                      
                     <div class="form-group">
                         <label class="form-label text-main pt-3" for="email">E-Mailadres</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="" required>
@@ -109,6 +106,10 @@
                     <div class="form-group">
                         <label class="form-label text-main pt-3" for="wachtwoord">Wachtwoord</label>
                         <input type="password" class="form-control" id="wachtwoord" name="wachtwoord" placeholder="" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label text-main pt-3" for="reason">Reden voor aanvraag</label>
+                        <input type="text" class="form-control" id="reason" name="reason" placeholder="" required>
                     </div>
                     <div class="btn-message pt-3">
                         <button class="btn btn-primary btn-lg" type="submit" name="submit">Account aanvragen</button>

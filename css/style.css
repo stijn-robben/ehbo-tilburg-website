@@ -226,9 +226,9 @@ body {
 }
 
 .login-form {
-    margin-left:20%;
-    margin-right:20%;
-    padding:3em;
+    margin-left:10%;
+    margin-right:10%;
+    padding:1.5em;
     background-color: #013365;
     border-radius:1em;
 }

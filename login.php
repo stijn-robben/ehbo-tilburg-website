@@ -3,21 +3,25 @@ if (isset($_POST['submit'])) {
     $id = $_POST['id'];
     $password = $_POST['password'];
     $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+    $port = 25060;
     $user = 'Knv-ehbo-tilburg';
-    $pass = 'Ehbo123!';
+    $pass = '3HBO!';
     $dbname = 'Knv-ehbo-tilburg';
-    $conn = mysqli_connect($host, $user, $pass, $dbname);
 
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+    // Create connection
+    $conn = new mysqli($host, $user, $pass, $dbname, $port);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
     $query = "SELECT * FROM user WHERE id = '$id' AND password = '$password'";
-    $result = mysqli_query($conn, $query);
+    $result = $conn->query($query);
 
-    if (mysqli_num_rows($result) > 0) {
+    if ($result->num_rows > 0) {
         // Gebruiker gevonden, toon gegevens op nieuwe pagina
-        $row = mysqli_fetch_assoc($result);
+        $row = $result->fetch_assoc();
         $voornaam = $row['firstname'];
         $achternaam = $row['lastname'];
         $email = $row['email'];
@@ -39,7 +43,6 @@ if (isset($_POST['submit'])) {
             // Voeg hier de inhoud toe die je aan leden wilt tonen
         }
 
-
         echo "<p>Email: $email</p>";
         echo "<p>First Name: $voornaam</p>";
         echo "<p>Last Name: $achternaam</p>";
@@ -55,6 +58,6 @@ if (isset($_POST['submit'])) {
         echo "<p>Invalid lidnummer or wachtwoord. Please try again.</p>";
     }
 
-    mysqli_close($conn);
+    $conn->close();
 }
 ?>

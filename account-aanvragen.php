@@ -18,8 +18,7 @@ if (isset($_POST['submit'])) {
     }
 
     $postcode_regex = '/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/';
-    $postcode = "1234AB";
-    if (preg_match($postcode_regex, $postcode)) {
+    if (preg_match($postcode_regex, $postal)) {
         echo "De postcode voldoet aan de eisen.";
     } else {
         echo "De postcode voldoet niet aan de eisen.";
@@ -27,11 +26,27 @@ if (isset($_POST['submit'])) {
 
     $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
     $user = 'Knv-ehbo-tilburg';
-    $pass = 'Ehbo123!';
+    $pass = '3HBO!';
     $dbname = 'Knv-ehbo-tilburg';
-    $conn = mysqli_connect($host, $user, $pass, $dbname);
-    $hashedPassword = password_hash($wachtwoord, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$password')";
-    mysqli_query($conn, $sql);
+    $port = 25060;
+
+    $conn = mysqli_init();
+    mysqli_options($conn, MYSQLI_OPT_CONNECT_TIMEOUT, 10);
+    mysqli_real_connect($conn, $host, $user, $pass, $dbname, $port);
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$hashedPassword')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Account is aangemaakt.";
+    } else {
+        echo "Fout bij het aanmaken van het account: " . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
 }
 ?>

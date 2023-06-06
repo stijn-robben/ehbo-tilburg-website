@@ -2,7 +2,7 @@
     try{
         $dsn = "mysql: dbname=Knv-ehbo-tilburg; host=Knv-ehbo-tilburg";
         $user = "Knv-ehbo-tilburg";
-        $pswd = "Ehbo123!";
+        $pswd = "3HBO!";
 
         $conn = new PDO($dsn, $user, $pswd);
 

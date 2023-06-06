@@ -25,10 +25,10 @@ if (isset($_POST['submit'])) {
         echo "De postcode voldoet niet aan de eisen.";
     }
 
-    $host = 'localhost';
-    $user = 'id19625723_root';
-    $pass = 'ehboAvans23!';
-    $dbname = 'id19625723_ehbo';
+    $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+    $user = 'Knv-ehbo-tilburg';
+    $pass = 'Ehbo123!';
+    $dbname = 'Knv-ehbo-tilburg';
     $conn = mysqli_connect($host, $user, $pass, $dbname);
     $hashedPassword = password_hash($wachtwoord, PASSWORD_DEFAULT);
     $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$password')";

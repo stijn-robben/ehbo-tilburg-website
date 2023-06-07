@@ -260,3 +260,8 @@ body {
 .forgot-password{
     text-decoration-color: var(--color3) !important;
 }
+
+.popup-form {
+    border-width: 2px;
+    border-color: var(--color1);
+}

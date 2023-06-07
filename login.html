@@ -60,15 +60,39 @@
                         </div>
                     </li>
 
+
                     <a class="nav-link" href="contact.html">
                         <p class="text-secondary text-nav">Contact</p>
                     </a>
                     <div class="pt-2">
                         <a class="btn btn-secondary btn-lg" href="login.html" role="button">Inloggen</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+                        <!--Wachtwoord vergeten pop-up-->
+                        <div class="modal fade" id="forgotPasswordModal" tabindex="-1"
+                            aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-secondary" id="forgotPasswordModalLabel">Wachtwoord
+                                            vergeten</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="email" class="text-secondary form-label">Email</label>
+                                                <input type="email" class="form-control popup-form" id="email"
+                                                    required />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer justify-content-start">
+                                        <button type="button" class="btn btn-secondary">Verstuur</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
     </nav>
 
     <!-- "Ga terug" button -->

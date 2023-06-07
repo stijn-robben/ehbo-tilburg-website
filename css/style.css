@@ -265,21 +265,7 @@ body {
     text-decoration-color: var(--color3) !important;
 }
 
-.go-back-button {
-    position: fixed;
-    top: 100px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.go-back-button:hover {
-    background-color: #0056b3;
-    color: #fff;
+.popup-form {
+    border-width: 2px;
+    border-color: var(--color1);
 }

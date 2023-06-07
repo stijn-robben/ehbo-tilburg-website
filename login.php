@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if (isset($_POST['submit'])) {
     $id = $_POST['id'];
     $password = $_POST['password'];
@@ -35,7 +37,7 @@ if (isset($_POST['submit'])) {
         // Controleren of de gebruiker een admin is of niet
         if ($role == 'admin') {
             // Nieuwe pagina voor admin weergeven
-            header("Location: beheer.html");
+            header("Location: beheer.php");
             exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
         } else {
             // Nieuwe pagina voor leden weergeven

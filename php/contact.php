@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Gegevens voor de databaseverbinding
 $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
 $port = 25060;

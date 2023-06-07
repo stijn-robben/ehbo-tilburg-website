@@ -1,4 +1,6 @@
 <?php
+session_start();
+
     try{
         $dsn = "mysql: dbname=Knv-ehbo-tilburg; host=Knv-ehbo-tilburg";
         $user = "Knv-ehbo-tilburg";

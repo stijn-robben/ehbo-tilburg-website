@@ -78,10 +78,69 @@
         <div class="jumbotron bg-jumbotron">
             <div class="container">
                 <h1 class="jumbotron-head">Beheer</h1>
-                <p class="jumbotron-text col-md-7">Test</p>
+                <!-- Cursus toevoegen button -->
+                <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#cursusToevoegenModal">
+                    Cursus toevoegen
+                </button>
+
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="cursusToevoegenModal"
+                    tabindex="-1"
+                    aria-labelledby="cursusToevoegenModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="cursusToevoegenModalLabel">Cursus toevoegen</h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Cursus toevoegen form -->
+                                <form
+                                    id="contact-form"
+                                    class="login-form"
+                                    action="php/cursus-toevoegen.php"
+                                    method="POST"
+                                    role="form"
+                                >
+                                    <div class="form-group">
+                                        <label class="form-label text-main" for="date">Datum:</label>
+                                        <input type="date" id="date" name="date" required /><br /><br />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label text-main" for="subject">Onderwerp:</label>
+                                        <input type="text" id="subject" name="subject" required /><br /><br />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label text-main" for="keywords">Competenties:</label>
+                                        <input type="text" id="keywords" name="keywords" required /><br /><br />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label text-main" for="enrollments"
+                                            >Maximum aantal inschrijvingen:</label
+                                        >
+                                        <input type="number" id="enrollments" name="enrollments" required /><br /><br />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" form="contact-form" class="btn btn-secondary">
+                                    Cursus toevoegen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
         <!--Footer-->
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 container">
             <div class="col-md-4 d-flex align-items-center mb-3 me-2 mb-md-0 lh-1">

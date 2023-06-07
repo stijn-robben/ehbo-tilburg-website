@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if (isset($_POST['submit'])) {
     $subject = $_POST['subject'];
     $date = $_POST['date'];

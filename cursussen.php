@@ -15,9 +15,11 @@
         <link rel="stylesheet" href="./css/style.css" />
         <link rel="icon" type="image/x-icon" href="/img/s.png" />
         <script defer src="./js/script.js"></script>
-        <title>EHBO Tilburg</title>
+        <title>EHBO Tilburg - Cursussen</title>
     </head>
+
     <body class="bg-light">
+        <?php include 'php/get-cursussen.php'; ?>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg bg-light fixed-top">
             <div class="container">
@@ -26,9 +28,9 @@
                 /></a>
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-link" href="lidmaatschap.html"
-                            ><p class="text-secondary text-nav">Lidmaatschap</p></a
-                        >
+                        <a class="nav-link" href="lidmaatschap.html">
+                            <p class="text-secondary text-nav">Lidmaatschap</p>
+                        </a>
 
                         <li class="nav-item dropdown nav-link">
                             <a
@@ -38,19 +40,19 @@
                                 >Opleidingen</a
                             >
                             <div class="dropdown-menu">
-                                <a href="activiteiten.html" class="dropdown-item text-secondary text-nav"
-                                    ><p>Activiteiten</p></a
-                                >
+                                <a href="activiteiten.html" class="dropdown-item text-secondary text-nav">
+                                    <p>Activiteiten</p>
+                                </a>
                                 <!-- <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 2</p></a> -->
                             </div>
                         </li>
 
-                        <a class="nav-link" href="wie-zijn-wij.html"
-                            ><p class="text-secondary text-nav">Wie zijn wij</p></a
-                        >
-                        <a class="nav-link" href="hulpverlening.html"
-                            ><p class="text-secondary text-nav">Hulpverlening</p></a
-                        >
+                        <a class="nav-link" href="wie-zijn-wij.html">
+                            <p class="text-secondary text-nav">Wie zijn wij</p>
+                        </a>
+                        <a class="nav-link" href="hulpverlening.html">
+                            <p class="text-secondary text-nav">Hulpverlening</p>
+                        </a>
                         <li class="nav-item dropdown nav-link">
                             <a
                                 href="#"
@@ -59,13 +61,21 @@
                                 >Overig</a
                             >
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 1</p></a>
-                                <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 2</p></a>
-                                <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 3</p></a>
+                                <a href="#" class="dropdown-item text-secondary text-nav">
+                                    <p>Item 1</p>
+                                </a>
+                                <a href="#" class="dropdown-item text-secondary text-nav">
+                                    <p>Item 2</p>
+                                </a>
+                                <a href="#" class="dropdown-item text-secondary text-nav">
+                                    <p>Item 3</p>
+                                </a>
                             </div>
                         </li>
 
-                        <a class="nav-link" href="contact.html"><p class="text-secondary text-nav">Contact</p></a>
+                        <a class="nav-link" href="contact.html">
+                            <p class="text-secondary text-nav">Contact</p>
+                        </a>
                         <div class="pt-2">
                             <a class="btn btn-secondary btn-lg" href="login.html" role="button">Inloggen</a>
                         </div>
@@ -74,71 +84,35 @@
             </div>
         </nav>
 
-        <!--Account aanvragen-->
-        <div class="jumbotron bg-inloggen">
+        <!-- Cursussen -->
+        <div class="jumbotron bg-jumbotron">
             <div class="container">
-                <p class="jumbotron-head h2-secondary">Account aanvragen</p>
-            </div>
-            <div class="container pt-5 pb-5">
-                <form id="contact-form" class="login-form" action="php/account-aanvragen.php" method="POST" role="form">
-                    <div class="form-group">
-                        <label class="form-label text-main" for="firstname">Voornaam</label>
-                        <input type="text" class="form-control" id="firstname" name="firstname" required />
+                <h1 class="jumbotron-head">Cursussen</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5 class="card-title">Datum</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="card-title">Onderwerp</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="card-title">Competenties</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="card-title">Aantal inschrijvingen</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="lastname">Achternaam</label>
-                        <input type="text" class="form-control" id="lastname" name="lastname" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="postal">Postcode</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="postal"
-                            name="postal"
-                            placeholder="(Bijv. 1234 AB)"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="city">Stad</label>
-                        <input type="text" class="form-control" id="city" name="city" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="address">Adres</label>
-                        <input type="text" class="form-control" id="address" name="address" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="description">Reden voor aanvraag</label>
-                        <textarea
-                            class="form-control"
-                            id="description"
-                            name="description"
-                            rows="3"
-                            placeholder="Waarom wilt u een account aanvragen?"
-                            required
-                        ></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label text-main pt-3" for="password">Wachtwoord</label>
-                        <input type="password" class="form-control" id="password" name="password" required />
-                    </div>
-
-                    <div class="btn-message pt-3">
-                        <button class="btn btn-primary btn-lg" type="submit" name="submit">Stuur aanvraag</button>
-                    </div>
-                </form>
+                    <?php echo $coursesHTML; ?>
+                </div>
             </div>
         </div>
 
@@ -198,6 +172,7 @@
                 </li>
             </ul>
         </footer>
+
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

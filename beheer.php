@@ -1,3 +1,40 @@
+<?php
+
+session_start();
+
+// $logFile = 'log.txt'; // File path for the log file
+
+// $logMessage = "before isset loggedin\n";
+// file_put_contents($logFile, $logMessage . PHP_EOL, FILE_APPEND);
+
+
+// file_put_contents($logFile, $_SESSION['loggedin'] . PHP_EOL, FILE_APPEND);
+
+// file_put_contents($logFile, "\n" . PHP_EOL, FILE_APPEND);
+
+
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin'])) {
+    // User is not logged in, redirect to the login page
+    header("Location: login.html");
+    exit(); // Stop further execution of the code
+}
+
+// file_put_contents($logFile, "before session role\n" . PHP_EOL, FILE_APPEND);
+// file_put_contents($logFile, "{$_SESSION['role']}" . PHP_EOL, FILE_APPEND);
+
+
+// Controleer of de gebruiker is ingelogd
+if (isset($_SESSION['role'])) {
+    echo "inside of isset role";
+    echo $_SESSION['role'];
+    // Controleer of de gebruiker is ingelogd als admin
+    if ($_SESSION['role'] === 'admin') {
+        // Gebruiker is ingelogd als admin, toon de beheerpagina
+        $message = "admin is role";
+        echo $message ;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,7 +103,7 @@
             </div>
         </div>
     </nav>
-
+    
     <!--Beheer-->
     <div class="jumbotron bg-jumbotron">
         <div class="container">
@@ -83,7 +120,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-secondary" id="cursusToevoegenModalLabel">Wachtwoord vergeten</h5>
+                            <h5 class="modal-title text-secondary" id="cursusToevoegenModalLabel">Cursus toevoegen</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -105,11 +142,8 @@
                                     <label class="form-label text-secondary" for="enrollments">Maximum aantal inschrijvingen:</label>
                                     <input type="number" id="enrollments" class="form-control popup-form" name="enrollments" required /><br /><br />
                                 </div>
-                                <div class="form-group">
-                                    <button type="submit" form="contact-form" class="btn btn-secondary">
-                                        Cursus toevoegen
-                                    </button>
-
+                                <div class="btn-message pt-3">
+                                    <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Cursus toevoegen</button>
                                 </div>
                             </form>
                         </div>
@@ -147,3 +181,15 @@
 </body>
 
 </html>
+
+<?php
+        exit(); // Stop de verdere uitvoering van de code
+    }
+}
+// file_put_contents($logFile, "sesion is not set" . PHP_EOL, FILE_APPEND);
+
+// Gebruiker is niet ingelogd als admin of niet ingelogd, doorverwijzen naar de login-pagina
+header("Location: login.html");
+exit();
+
+?>

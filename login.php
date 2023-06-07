@@ -33,6 +33,8 @@ if (isset($_POST['submit'])) {
         $beschrijving = $row['description'];
         $approved = $row['approved'];
         $role = $row['role'];
+        // Set the role in session
+        $_SESSION['role'] = $role;
 
         // Controleren of de gebruiker een admin is of niet
         if ($role == 'admin') {
@@ -60,6 +62,7 @@ if (isset($_POST['submit'])) {
         echo "<p>Invalid lidnummer or wachtwoord. Please try again.</p>";
     }
 
+    $_SESSION['loggedin'] = true;
     $conn->close();
 }
 ?>

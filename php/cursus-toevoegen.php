@@ -1,37 +1,40 @@
 <?php
 session_start();
 
-if (isset($_POST['submit'])) {
-    $subject = $_POST['subject'];
-    $date = $_POST['date'];
-    $enrollments = $_POST['enrollments'];
-    $keywords = $_POST['keywords'];
+// Gegevens voor de databaseverbinding
+$host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+$port = 25060;
+$user = 'Knv-ehbo-tilburg';
+$pass = '3HBO!';
+$dbname = 'Knv-ehbo-tilburg';
 
-    $conn = mysqli_connect($host, $user, $pass, $dbname);
+// Verbinding maken met de database
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-    $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
-    $user = 'Knv-ehbo-tilburg';
-    $pass = '3HBO!';
-    $dbname = 'Knv-ehbo-tilburg';
-    $port = 25060;
-
-    $conn = mysqli_init();
-    mysqli_options($conn, MYSQLI_OPT_CONNECT_TIMEOUT, 10);
-    mysqli_real_connect($conn, $host, $user, $pass, $dbname, $port);
-
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    $sql = "INSERT INTO cursus (subject, date, enrollments, keywords) VALUES ('$subject', '$date', '$enrollments', '$keywords')";
-   
-    if (mysqli_query($conn, $sql)) {
-        echo "Cursus toegevoegd.";
-    } else {
-        echo "Fout bij het toevoegen van een cursus." . mysqli_error($conn);
-    }
-
-    mysqli_close($conn);
-
+// Controleren op fouten bij de verbinding
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Controleren of het formulier is verzonden
+if (isset($_POST["submit"])) {
+    // Gegevens uit het formulier halen
+    $date = $_POST["date"];
+    $subject = $_POST["subject"];
+    $keywords = $_POST["keywords"];
+    $enrollments = $_POST["enrollments"];
+
+    // Query om de gegevens in de database in te voegen
+    $sql = "INSERT INTO cursus (date, subject, keywords, enrollments) VALUES ('$date', '$subject', '$keywords', '$enrollment')";
+
+    // Controleren of de query succesvol is uitgevoerd
+    if ($conn->query($sql) === TRUE) {
+        echo "Cursus is toegevoegd.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Verbinding met de database sluiten
+$conn->close();
 ?>

@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $date = $row["date"];
         $subject = $row["subject"];
-        $competencies = $row["competencies"];
+        $keywords = $row["keywords"];
         $enrollments = $row["enrollments"];
 
         $courseHTML = '
@@ -43,7 +43,7 @@ if ($result->num_rows > 0) {
                                 <p class="card-text">' . $subject . '</p>
                             </div>
                             <div class="col-md-3">
-                                <p class="card-text">' . $competencies . '</p>
+                                <p class="card-text">' . $keywords . '</p>
                             </div>
                             <div class="col-md-3">
                                 <p class="card-text">' . $enrollments . '</p>

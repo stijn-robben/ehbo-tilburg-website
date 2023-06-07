@@ -7,7 +7,7 @@ $pass = '3HBO!';
 $dbname = 'Knv-ehbo-tilburg';
 
 // Verbinding maken met de database
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 
 // Controleren op fouten bij de verbinding
 if ($conn->connect_error) {
@@ -23,7 +23,7 @@ if (isset($_POST["submit"])) {
     $description = $_POST["description"];
 
     // Query om de gegevens in de database in te voegen
-    $sql = "INSERT INTO contact (name, email, telefoon, description) VALUES ('$name', '$email', '$telefoon', '$description')";
+    $sql = "INSERT INTO contact (name, email, phonenumber, message) VALUES ('$name', '$email', '$telefoon', '$description')";
 
     // Controleren of de query succesvol is uitgevoerd
     if ($conn->query($sql) === TRUE) {

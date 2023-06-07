@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
-    }
+    }   
 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$hashedPassword')";

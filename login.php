@@ -24,20 +24,24 @@ if (isset($_POST['submit'])) {
     if ($result->num_rows > 0) {
         // Gebruiker gevonden, toon gegevens op nieuwe pagina
         $row = $result->fetch_assoc();
-        $voornaam = $row['firstname'];
-        $achternaam = $row['lastname'];
-        $email = $row['email'];
-        $postcode = $row['postal'];
-        $woonplaats = $row['city'];
-        $adres = $row['address'];
-        $beschrijving = $row['description'];
-        $approved = $row['approved'];
-        $role = $row['role'];
+        $hashedPassword = $row['password'];
+
+        if (password_verify($password, $hashedPassword)) {
+
+            $voornaam = $row['firstname'];
+            $achternaam = $row['lastname'];
+            $email = $row['email'];
+            $postcode = $row['postal'];
+            $woonplaats = $row['city'];
+            $adres = $row['address'];
+            $beschrijving = $row['description'];
+            $approved = $row['approved'];
+            $role = $row['role'];
 
         // Controleren of de gebruiker een admin is of niet
         if ($role == 'admin') {
             // Nieuwe pagina voor admin weergeven
-            header("Location: beheer.php");
+            header("Location: beheer.html");
             exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
         } else {
             // Nieuwe pagina voor leden weergeven
@@ -45,15 +49,20 @@ if (isset($_POST['submit'])) {
             // Voeg hier de inhoud toe die je aan leden wilt tonen
         }
 
-        echo "<p>Email: $email</p>";
-        echo "<p>First Name: $voornaam</p>";
-        echo "<p>Last Name: $achternaam</p>";
-        echo "<p>Postal Code: $postcode</p>";
-        echo "<p>City: $woonplaats</p>";
-        echo "<p>Address: $adres</p>";
-        echo "<p>Description: $beschrijving</p>";
-        echo "<p>Approved: $approved</p>";
-        echo "<p>Role: $role</p>";
+            echo "<p>Email: $email</p>";
+            echo "<p>First Name: $voornaam</p>";
+            echo "<p>Last Name: $achternaam</p>";
+            echo "<p>Postal Code: $postcode</p>";
+            echo "<p>City: $woonplaats</p>";
+            echo "<p>Address: $adres</p>";
+            echo "<p>Description: $beschrijving</p>";
+            echo "<p>Approved: $approved</p>";
+            echo "<p>Role: $role</p>";
+        } else {
+            // Gebruiker niet gevonden, toon foutmelding
+            echo "<h1>Login Failed</h1>";
+            echo "<p>Invalid lidnummer or wachtwoord. Please try again.</p>";
+        }
     } else {
         // Gebruiker niet gevonden, toon foutmelding
         echo "<h1>Login Failed</h1>";

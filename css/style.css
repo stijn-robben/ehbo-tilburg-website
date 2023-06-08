@@ -72,6 +72,10 @@ body {
     font-family: var(--font1);
 }
 
+.jumbotron-head-sm {
+    font-size:55px;
+}
+
 .jumbotron-text {
     padding-top: 2rem;
     font-family: var(--font2) !important;

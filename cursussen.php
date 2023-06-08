@@ -1,72 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Website van KNV EHBO Tilburg." />
-        <meta name="robots" content="index, follow" />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-            crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="./css/style.css" />
-        <link rel="icon" type="image/x-icon" href="/img/s.png" />
-        <script defer src="./js/script.js"></script>
-        <title>EHBO Tilburg - Cursussen</title>
-    </head>
 
-    <body class="bg-light">
-        <?php include 'get-cursussen.php'; ?>
-        <!--Navbar-->
-        <div id="navbar-placeholder"></div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Website van KNV EHBO Tilburg." />
+    <meta name="robots" content="index, follow" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="icon" type="image/x-icon" href="/img/s.png" />
+    <script defer src="./js/script.js"></script>
+    <title>EHBO Tilburg - Cursussen</title>
+</head>
 
-        <!-- Ga terug button -->
-        <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button">
-            Ga terug
-        </a>
+<body class="bg-light">
+    <?php include 'get-cursussen.php'; ?>
+    <!--Navbar-->
+    <div id="navbar-placeholder"></div>
 
-        <!-- Cursussen -->
-        <div class="jumbotron bg-jumbotron">
+    <!-- Ga terug button -->
+    <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button">
+        Ga terug
+    </a>
+
+    <!-- Cursussen -->
+    <div class="jumbotron bg-jumbotron">
+        <div class="container">
+            <h1 class="jumbotron-head">Cursussen</h1>
             <div class="container">
-                <h1 class="jumbotron-head">Cursussen</h1>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5 class="card-title">Datum</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h5 class="card-title">Onderwerp</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h5 class="card-title">Competenties</h5>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <h5 class="card-title">Aantal inschrijvingen</h5>
-                                        </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h5 class="text-main">Datum</h5>
                                     </div>
+                                    <div class="col-md-2">
+                                        <h5 class="text-main">Onderwerp</h5>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h5 class="text-main">Competenties</h5>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5 class="text-main">Aantal inschrijvingen</h5>
+                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php echo $coursesHTML; ?>
                 </div>
+                <?php echo $coursesHTML; ?>
             </div>
         </div>
+    </div>
 
-        <!--Footer-->
-        <div id="footer-placeholder"></div>
+    <!--Footer-->
+    <div id="footer-placeholder"></div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
 </html>

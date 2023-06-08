@@ -1,27 +1,27 @@
 <?php
 session_start();
 
-    // Connect to the database
-    $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
-    $port = 25060;
-    $user = 'Knv-ehbo-tilburg';
-    $pass = '3HBO!';
-    $dbname = 'Knv-ehbo-tilburg';
+// Connect to the database
+$host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+$port = 25060;
+$user = 'Knv-ehbo-tilburg';
+$pass = '3HBO!';
+$dbname = 'Knv-ehbo-tilburg';
 
-    // Create connection
-    $conn = new mysqli($host, $user, $pass, $dbname, $port);
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
 
-    // Check connection
-    if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
-    }
+// Check connection
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
 
-    // Fetch courses from the database
-    $query = "SELECT * FROM cursus";
-    $result = mysqli_query($conn, $query);
+// Fetch courses from the database
+$query = "SELECT * FROM cursus";
+$result = mysqli_query($conn, $query);
 
-   // Generate HTML for courses
+// Generate HTML for courses
 $coursesHTML = "";
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -36,22 +36,20 @@ if ($result->num_rows > 0) {
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <p class="card-text">' . $date . '</p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <p class="card-text">' . $subject . '</p>
                             </div>
                             <div class="col-md-3">
                                 <p class="card-text">' . $keywords . '</p>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <p class="card-text">' . $enrollments . '</p>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-end">
-                                <button class="btn btn-sm btn-primary">Button</button>
+                            <div class="col-md-3 text-center">
+                            <button class="btn btn-sm btn-primary">Inschrijven</button>
                             </div>
                         </div>
                     </div>
@@ -65,4 +63,3 @@ if ($result->num_rows > 0) {
 
 // Close the database connection
 $conn->close();
-?>

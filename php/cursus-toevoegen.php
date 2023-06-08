@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
     $enrollments = $_POST["enrollments"];
 
     // Query om de gegevens in de database in te voegen
-    $sql = "INSERT INTO cursus (date, subject, keywords, enrollments) VALUES ('$date', '$subject', '$keywords', '$enrollment')";
+    $sql = "INSERT INTO cursus (date, subject, keywords, enrollments) VALUES ('$date', '$subject', '$keywords', '$enrollments')";
 
     // Controleren of de query succesvol is uitgevoerd
     if ($conn->query($sql) === TRUE) {

@@ -9,8 +9,8 @@
     --font1: 'Headway';
     --font2: 'Open Sans';
     --color1: #013365;
-    --color2: #FCFBF4;
-    --color3: #F9E22A;
+    --color2: #fcfbf4;
+    --color3: #f9e22a;
     --color4: rgba(0, 0, 0, 0.6);
 }
 
@@ -46,7 +46,6 @@ body {
     padding-right: 1rem;
     padding-top: 0.5rem;
 }
-
 
 .bg-jumbotron {
     background-image: url(../img/banner.jpg);
@@ -200,12 +199,11 @@ body {
 }
 
 .form-label {
-
     margin: 0;
     display: block;
     opacity: 1;
-    -webkit-transition: .333s ease top, .333s ease opacity;
-    transition: .333s ease top, .333s ease opacity;
+    -webkit-transition: 0.333s ease top, 0.333s ease opacity;
+    transition: 0.333s ease top, 0.333s ease opacity;
 }
 
 .form-control {
@@ -268,4 +266,12 @@ body {
 .popup-form {
     border-width: 2px;
     border-color: var(--color1);
+}
+
+.go-back {
+    position: fixed;
+    top: 130px;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-left: 5px;
 }

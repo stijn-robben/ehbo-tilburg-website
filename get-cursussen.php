@@ -18,7 +18,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch courses from the database
-$query = "SELECT * FROM cursus";
+$query = "SELECT * FROM course";
 $result = mysqli_query($conn, $query);
 
 // Generate HTML for courses

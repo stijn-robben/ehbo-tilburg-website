@@ -27,7 +27,9 @@
     <!-- Cursussen -->
     <div class="jumbotron bg-jumbotron">
         <div class="container">
-            <h1 class="jumbotron-head">Cursussen</h1>
+            <div class="container">
+                <p class="jumbotron-head h2-secondary">Cursussen</p>
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -46,8 +48,6 @@
                                     <div class="col-md-2">
                                         <h5 class="text-main">Aantal inschrijvingen</h5>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

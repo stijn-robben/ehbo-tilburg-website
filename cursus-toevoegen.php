@@ -21,11 +21,11 @@ if (isset($_POST["submit"])) {
     // Gegevens uit het formulier halen
     $date = $_POST["date"];
     $subject = $_POST["subject"];
+    $max_enrollments = $_POST["max_enrollments"];
     $keywords = $_POST["keywords"];
-    $enrollments = $_POST["enrollments"];
 
     // Query om de gegevens in de database in te voegen
-    $sql = "INSERT INTO cursus (date, subject, keywords, enrollments) VALUES ('$date', '$subject', '$keywords', '$enrollments')";
+    $sql = "INSERT INTO course (date, subject, max_enrollments, keywords) VALUES ('$date', '$subject', '$max_enrollments', '$keywords')";
 
     // Controleren of de query succesvol is uitgevoerd
     if ($conn->query($sql) === TRUE) {

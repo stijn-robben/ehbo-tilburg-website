@@ -18,7 +18,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch courses from the database
-$query = "SELECT * FROM course";
+$query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
 $result = mysqli_query($conn, $query);
 
 // Generate HTML for courses
@@ -28,7 +28,9 @@ if ($result->num_rows > 0) {
         $date = $row["date"];
         $subject = $row["subject"];
         $keywords = $row["keywords"];
+        $max_enrollments = $row["max_enrollments"];
         $enrollments = $row["enrollments"];
+        $enrollments_text = $enrollments . "/" . $max_enrollments;
 
         $courseHTML = '
         <div class="row">
@@ -46,7 +48,7 @@ if ($result->num_rows > 0) {
                                 <p class="card-text">' . $keywords . '</p>
                             </div>
                             <div class="col-md-2">
-                                <p class="card-text">' . $enrollments . '</p>
+                                <p class="card-text">' . $enrollments_text . '</p>
                             </div>
                             <div class="col-md-3 text-center">
                             <button class="btn btn-sm btn-primary">Inschrijven</button>

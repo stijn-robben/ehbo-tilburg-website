@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $query = "SELECT * FROM user WHERE id = '$id' AND password = '$password'";
+    $query = "SELECT * FROM user WHERE id_user = '$id' AND password = '$password'";
     $result = $conn->query($query);
 
     if ($result->num_rows > 0) {

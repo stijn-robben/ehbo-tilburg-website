@@ -11,6 +11,8 @@ if (isset($_POST['submit'])) {
     $description = $_POST['description'];
     $password = $_POST['password'];
 
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
     // Controleer of het wachtwoord aan de vereisten voldoet met behulp van de regex
     $password_regex = '/^(?=.*\d)(?=.*[!@#$%^&*])\S{8,}/';
     if (!preg_match($password_regex, $password)) {
@@ -38,10 +40,10 @@ if (isset($_POST['submit'])) {
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
-    }   
+    }
 
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$hashedPassword')";
+    $sql = "INSERT INTO user (firstname, lastname, email, postal, city, address, description, password) 
+            VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$password_hash')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Account is aangemaakt.";

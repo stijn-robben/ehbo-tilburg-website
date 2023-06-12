@@ -16,8 +16,6 @@
 
 <body class="bg-light">
     <?php
-    session_start();
-
     // Connect to the database
     $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
     $port = 25060;

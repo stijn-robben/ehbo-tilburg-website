@@ -64,18 +64,8 @@ if (isset($_POST['submit'])) {
                 header("Location: beheer.php");
                 exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
             } else {
-                // Nieuwe pagina voor leden weergeven
-                echo "<h1>Welcome, $voornaam!</h1>";
-                echo "<p>Email: $email</p>";
-                echo "<p>First Name: $voornaam</p>";
-                echo "<p>Last Name: $achternaam</p>";
-                echo "<p>Postal Code: $postcode</p>";
-                echo "<p>City: $woonplaats</p>";
-                echo "<p>Address: $adres</p>";
-                echo "<p>Description: $beschrijving</p>";
-                echo "<p>Approved: $approved</p>";
-                echo "<p>Role: $role</p>";
-                // Voeg hier de inhoud toe die je aan leden wilt tonen
+                header("Location: index.html");
+                exit();
             }
             // Voer hier de verdere logica uit nadat de gebruiker succesvol is ingelogd
         } else {

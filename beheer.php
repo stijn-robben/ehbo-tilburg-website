@@ -72,6 +72,8 @@ if (isset($_SESSION['role'])) {
                         Content toevoegen
                     </button>
 
+                    <a href="approved.php" class="pt-2 btn btn-primary btn-lg">Approved toevoegen</a>
+
                     <!-- Modal Cursus toevoegen -->
                     <div class="modal fade" id="cursusToevoegenModal" tabindex="-1" aria-labelledby="cursusToevoegenModalLabel"
                         aria-hidden="true">
@@ -116,6 +118,7 @@ if (isset($_SESSION['role'])) {
                     </div>
                 </div>
             </div>
+
 
             <!-- Modal Content toevoegen -->
             <div class="modal fade" id="contentToevoegenModal" tabindex="-1" aria-labelledby="contentToevoegenModalLabel"

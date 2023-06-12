@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
-    <title>EHBO Tilburg - Cursussen</title>
+    <title>EHBO Tilburg - Homepage</title>
 </head>
 
 <body class="bg-light">
@@ -39,15 +39,31 @@
     $query = "SELECT * FROM content WHERE page = 'homepage'";
     $result = mysqli_query($conn, $query);
 
-    // Generate HTML for courses
+    // Generate HTML for content
     $contentHTML = "";
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $page = $_POST["page"];
-            $part = $_POST["part"];
-            $title = $_POST["title"];
-            $text = $_POST["text"];
-            $img_url = $_POST["img_url"];
+            $title = $row["title"];
+            $text = $row["text"];
+            $img_url = $row["img_url"];
+
+            $contentHTML .= '        <div class="jumbotron bg-jumbotron">
+            <div class="container">
+                <div class="d-lg-none">
+                    <h1 class="jumbotron-head jumbotron-head-sm">
+                    ' . $title . '
+                    </h1>
+                </div>
+                <div class="d-none d-lg-block">
+                    <h1 class="jumbotron-head">
+                    ' . $title . '
+                    </h1>
+                </div>
+                <p class="jumbotron-text col-md-7">
+                ' . $text . '
+                </p>
+            </div>
+        </div>';
         }
     }
 
@@ -62,6 +78,13 @@
     <!-- Ga terug button -->
     <div class="d-none d-lg-block">
         <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button"> Ga terug </a>
+    </div>
+
+    <!-- Cursussen -->
+    <div class="jumbotron bg-jumbotron">
+        <div class="d-none d-lg-block">
+            <?php echo $contentHTML; ?>
+        </div>
     </div>
 
     <!--Footer-->

@@ -11,7 +11,7 @@ if (isset($_POST['submit'])) {
     $dbname = 'Knv-ehbo-tilburg';
     $port = 25060;
 
-//     $mypass = "1234";
+    //     $mypass = "1234";
 //     $myhashpass = password_hash($mypass, PASSWORD_DEFAULT);
 //     if (password_verify($mypass, $myhashpass)) {
 //      echo "Password is correct"';
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
 
     $query = "SELECT * FROM user WHERE id_user = $id";
     $result = $conn->query($query);
- 
+
     if ($result->num_rows > 0) {
         // Gebruiker gevonden, toon gegevens op nieuwe pagina
         // $row = $result->fetch_assoc();
@@ -53,20 +53,28 @@ if (isset($_POST['submit'])) {
         $beschrijving = $row['description'];
         $approved = $row['approved'];
         $role = $row['role'];
+        $_SESSION['approved'] = $approved;
         $_SESSION['role'] = $role;
 
         // Controleer of het ingevoerde wachtwoord overeenkomt met het gehashte wachtwoord
         if (password_verify($password, $hashed_password)) {
-              $_SESSION['loggedin'] = true;
             //echo "Inloggen gelukt!";
-            if ($role == 'admin') {
-                // Nieuwe pagina voor admin weergeven
-                header("Location: beheer.php");
-                exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
-            } else {
-                header("Location: index.html");
-                exit();
+            if ($approved == 1) {
+               // echo "approved is 1";
+                $_SESSION['loggedin'] = true;
+                if ($role == 'admin') {
+                  //  echo "role is admin";
+                    // Nieuwe pagina voor admin weergeven
+                    header("Location: beheer.php");
+                    exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
+                } else {
+                    header("Location: index.html");
+                    exit();
+                }
+            }else{
+                echo "Je account is niet goed gekeurd.";
             }
+            
             // Voer hier de verdere logica uit nadat de gebruiker succesvol is ingelogd
         } else {
             echo "Ongeldig ID of wachtwoord.";

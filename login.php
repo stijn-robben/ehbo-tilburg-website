@@ -69,10 +69,10 @@ if (isset($_POST['submit'])) {
             }
             // Voer hier de verdere logica uit nadat de gebruiker succesvol is ingelogd
         } else {
-            echo "Ongeldig ID of wachtwoord 1.";
+            echo "Ongeldig ID of wachtwoord.";
         }
     } else {
-        echo "Ongeldig ID of wachtwoord 2.";
+        echo "Ongeldig ID of wachtwoord.";
     }
 
     $_SESSION['loggedin'] = true;

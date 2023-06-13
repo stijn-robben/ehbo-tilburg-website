@@ -1,3 +1,100 @@
+<?php
+// Connect to the database
+$host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+$port = 25060;
+$user = 'Knv-ehbo-tilburg';
+$pass = '3HBO!';
+$dbname = 'Knv-ehbo-tilburg';
+
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
+
+// Check connection
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+// Fetch courses from the database
+// $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
+$query = "SELECT course.date, course.subject, enrollment.id_user, user.firstname, enrollment.id_enrollment
+            FROM enrollment
+            JOIN course ON enrollment.id_course = course.id_course
+            JOIN user ON enrollment.id_user = user.id_user";
+
+$result = mysqli_query($conn, $query);
+
+// Generate HTML for courses
+$coursesHTML = "";
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $date = date('d-m-Y', strtotime($row["date"]));
+        $subject = $row["subject"];
+        $id_user = $row["id_user"];
+        $firstname = $row["firstname"];
+
+        $id_enrollment = $row["id_enrollment"];
+
+        $courseHTML = '
+        <div class="row">
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p class="card-text">' . $date . '</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="card-text">' . $subject . '</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="card-text">' . $id_user . '</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p class="card-text">' . $firstname . '</p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <form action="" method="post" class="d-inline-block">
+                                    <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
+                                    <button type="submit" name="verwijder" class="btn btn-sm btn-primary">Verwijder</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+
+        $coursesHTML .= $courseHTML;
+    }
+}
+
+// if (isset($_POST['Verwijder'])) {
+//     $id = $_POST['id'];
+//     $updateQuery = "UPDATE user SET approved = 1 WHERE id_user = $id";
+//     mysqli_query($conn, $updateQuery);
+//     // Redirect to the same page to refresh the content
+//     // header("Location: " . $_SERVER['PHP_SELF']);
+//     exit();
+// }
+if (isset($_POST['verwijder'])) {
+    $id = $_POST['id_enrollment'];
+
+    // Verwijder de inschrijving uit de enrollment-tabel
+    $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
+    if (mysqli_query($conn, $deleteQuery)) {
+        header("Location: cursus-beheer.php");
+        exit();
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+
+}
+
+// Close the database connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,99 +113,6 @@
 </head>
 
 <body class="bg-light">
-    <?php
-    // Connect to the database
-    $host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
-    $port = 25060;
-    $user = 'Knv-ehbo-tilburg';
-    $pass = '3HBO!';
-    $dbname = 'Knv-ehbo-tilburg';
-
-    // Create connection
-    $conn = new mysqli($host, $user, $pass, $dbname, $port);
-
-    // Check connection
-    if (mysqli_connect_errno()) {
-        echo "Failed to connect to MySQL: " . mysqli_connect_error();
-        exit();
-    }
-
-    // Fetch courses from the database
-    // $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
-    $query = "SELECT course.date, course.subject, enrollment.id_user, user.firstname, enrollment.id_enrollment
-              FROM enrollment
-              JOIN course ON enrollment.id_course = course.id_course
-              JOIN user ON enrollment.id_user = user.id_user";
-
-    $result = mysqli_query($conn, $query);
-
-    // Generate HTML for courses
-    $coursesHTML = "";
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $date = date('d-m-Y', strtotime($row["date"]));
-            $subject = $row["subject"];
-            $id_user = $row["id_user"];
-            $firstname = $row["firstname"];
-
-            $id_enrollment = $row["id_enrollment"];
-    
-            $courseHTML = '
-            <div class="row">
-                <div class="col">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <p class="card-text">' . $date . '</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="card-text">' . $subject . '</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="card-text">' . $id_user . '</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <p class="card-text">' . $firstname . '</p>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <form action="" method="post" class="d-inline-block">
-                                        <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
-                                        <button type="submit" name="verwijder" class="btn btn-sm btn-primary">Verwijder</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>';
-
-            $coursesHTML .= $courseHTML;
-        }
-    }
-
-    // if (isset($_POST['Verwijder'])) {
-    //     $id = $_POST['id'];
-    //     $updateQuery = "UPDATE user SET approved = 1 WHERE id_user = $id";
-    //     mysqli_query($conn, $updateQuery);
-    //     // Redirect to the same page to refresh the content
-    //     // header("Location: " . $_SERVER['PHP_SELF']);
-    //     exit();
-    // }
-    if (isset($_POST['verwijder'])) {
-        $id = $_POST['id_enrollment'];
-
-        // Verwijder de inschrijving uit de enrollment-tabel
-        $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
-        mysqli_query($conn, $deleteQuery);
-
-        exit();
-    }
-
-    // Close the database connection
-    $conn->close();
-    ?>
-
     <!--Navbar-->
     <div id="navbar-placeholder"></div>
 

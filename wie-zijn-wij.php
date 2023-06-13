@@ -1,3 +1,50 @@
+<?php
+session_start();
+
+// Connect to the database
+$host = 'db-mysql-ams3-46626-do-user-8155278-0.b.db.ondigitalocean.com';
+$port = 25060;
+$user = 'Knv-ehbo-tilburg';
+$pass = '3HBO!';
+$dbname = 'Knv-ehbo-tilburg';
+
+// Create connection
+$conn = new mysqli($host, $user, $pass, $dbname, $port);
+
+// Check connection
+if (mysqli_connect_errno()) {
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+    exit();
+}
+
+// Fetch courses from the database
+$queryPart1 = "SELECT * FROM content WHERE page = 'wie_zijn_wij' AND part = 1;";
+$resultPart1 = mysqli_query($conn, $queryPart1);
+
+// Generate HTML for content
+$contentHTML = "";
+if ($resultPart1->num_rows > 0) {
+    while ($row = $resultPart1->fetch_assoc()) {
+        $title = $row["title"];
+        $text = $row["text"];
+        $img_url = $row["img_url"];
+
+        $contentHTML .= '<div class="jumbotron bg-jumbotron">
+        <div class="container">
+            <p class="jumbotron-head h2-secondary">' . $title . '</p>
+            <p class="jumbotron-text">' . $text . '</p>
+        </div>
+    </div>';
+    }
+}
+
+
+
+
+// Close the database connection
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +54,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Website van KNV EHBO Tilburg." />
     <meta name="robots" content="index, follow" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
@@ -25,33 +71,7 @@
     </div>
 
     <!--Wie zijn wij?-->
-    <div class="jumbotron bg-jumbotron">
-        <div class="container">
-            <p class="jumbotron-head h2-secondary">De vereniging</p>
-            <p class="jumbotron-text">De KNV EHBO afdeling Tilburg is een afdeling met ongeveer 150 leden. Het is een
-                actieve afdeling met enthousiaste leden, kaderinstructeurs en lotusmedewerkers die zich vol overgave
-                inzetten voor datgene waar EHBO voor staat: op verantwoorde wijze eerste hulp verlenen bij plotseling
-                optredende stoornissen in de gezondheidstoestand van een medemens. Om dit inderdaad verantwoord te
-                kunnen doen kan men bij onze afdeling behalve basiscursussen ook herhalingsavonden bijwonen, maar ook
-                aanvullende opleidingen volgens zoals Eerste Hulp aan Kinderen, Eerste Hulp bij Sportletsels en Eerste
-                Hulp bij Wandelletsels. In de basiscursus is standaard het gebruik van de AED (Automatische Externe
-                Defribillator) opgenomen. Ook worden we regelmatig gevraagd om voorlichting te geven bijv. bij
-                ouderkamers op basisscholen. Voor Eerste Hulp aan Kinderen kan indien gewenst ook een certificaat van
-                het Oranje Kruis worden aangevraagd. Dit is in het bijzonder van belang voor gastouders. Ook verzorgt de
-                afdeling Eerste Hulp opleidingen "op maat", dat wil zeggen: aangepast aan de behoefte van de
-                hulpverlener en de groep waaraan de hulp verleend moet worden. De basiscursus wordt gegeven op
-                maandagavond, en omvat 8 avonden plus een avond met examentraining. Na het examen kunt u, zonder extra
-                kosten, deelnemen aan een extra avond voor het behalen van de aantekening EHBO aan Kinderen. Voor
-                bedrijven kunnen we de basiscursus aanbieden in 5 ochtenden. Hiervoor is een minimum van 6 deelnemers
-                nodig. Neemt u contact met ons op voor nadere informatie. Door middel van workshops proberen we de
-                bestaande kennis verder uit te diepen en de vaardigheid te vergroten. Er worden lezingen gegeven over
-                relevante onderwerpen, buitenoefeningen opgezet, enzovoort. Door als EHBO-er aanwezig te zijn bij
-                diverse evenementen als sportwedstrijden, muziek en buurtfeesten etc. kunnen de leden inderdaad, mocht
-                het nodig zijn, op verantwoorde wijze een medemens helpen bij de eerder genoemde plotseling optredende
-                stoornis in zijn gezondheidstoestand. De KNV EHBO afdeling Tilburg is een afdeling waar we trots op
-                zijn.</p>
-        </div>
-    </div>
+    <?php echo $contentHTML; ?>
 
     <!--Team-->
     <div class="container pb-3">
@@ -195,9 +215,7 @@
     <!--Footer-->
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

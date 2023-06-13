@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     // Load the navbar.html file
-    navbarXhr.open('navbar.html', true);
+    navbarXhr.open('GET', 'navbar.html', true);
     navbarXhr.send();
 
     // Create a new XMLHttpRequest for the footer

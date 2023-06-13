@@ -37,16 +37,9 @@ if ($resultPart1->num_rows > 0) {
 
         $contentHTML .= '<div class="jumbotron bg-jumbotron">
             <div class="container">
-                <div class="d-lg-none">
-                    <h1 class="jumbotron-head jumbotron-head-sm">
-                        ' . $title . '
-                    </h1>
-                </div>
-                <div class="d-none d-lg-block">
-                    <h1 class="jumbotron-head">
-                        ' . $title . '
-                    </h1>
-                </div>
+            <div class="pt-5">
+            <p class="h2-main">' . $title . '</p>
+        </div>
 
                 <p class="jumbotron-text col-md-7">
                     ' . $text . '
@@ -119,6 +112,7 @@ if ($resultPart3->num_rows > 0) {
 // Close the database connection
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,12 +126,10 @@ $conn->close();
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
-    <title>EHBO Tilburg - Homepage</title>
+    <title>EHBO Tilburg - Lidmaatschap</title>
 </head>
 
 <body class="bg-light">
-
-
     <!--Navbar-->
     <div id="navbar-placeholder"></div>
 
@@ -145,8 +137,7 @@ $conn->close();
     <div class="d-none d-lg-block">
         <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button"> Ga terug </a>
     </div>
-
-    <!-- Cursussen -->
+    <!--Lidmaatschap-->
     <?php echo $contentHTML; ?>
 
     <!--Footer-->

@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 
         $postcode_regex = '/^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/';
         if (preg_match($postcode_regex, $postal)) {
-            echo "De postcode voldoet aan de eisen.";
+            // echo "De postcode voldoet aan de eisen.";
         } else {
             echo "De postcode voldoet niet aan de eisen.";
         }
@@ -70,7 +70,8 @@ if (isset($_POST['submit'])) {
             VALUES ('$firstname', '$lastname', '$email', '$postal', '$city', '$address', '$description', '$password_hash')";
 
         if ($conn->query($sql) === TRUE) {
-            echo '<script>alert("Uw nieuwe account is aangevraagd!");</script>';
+            //echo '<script>alert("Uw nieuwe account is aangevraagd!");</script>';
+            header("Location: aanvragen-bericht.html");
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

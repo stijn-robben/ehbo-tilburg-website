@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
                 if ($role == 'admin') {
                     $_SESSION['loggedin'] = true;
                     header("Location: beheer.php");
-                    exit(); // Zorg ervoor dat de verdere code niet wordt uitgevoerd na de doorverwijzing
+                    exit();
                 } else {
                     $_SESSION['loggedin'] = true;
                     header("Location: index.html");
@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
             echo "Ongeldig ID of wachtwoord.";
         }
     } else {
-        echo "Ongeldig ID of wachtwoord.";
+        $_SESSION['loggedin'] = false;
     }
 
     mysqli_close($conn);

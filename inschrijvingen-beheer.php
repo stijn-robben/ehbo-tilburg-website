@@ -17,7 +17,7 @@ if (mysqli_connect_errno()) {
 
 // Fetch courses from the database
 // $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
-$query = "SELECT course.date, course.subject, enrollment.id_user, user.firstname, enrollment.id_enrollment
+$query = "SELECT course.date, course.subject, enrollment.id_user, user.firstname, enrollment.id_enrollment, enrollment.present
             FROM enrollment
             JOIN course ON enrollment.id_course = course.id_course
             JOIN user ON enrollment.id_user = user.id_user";
@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
         $subject = $row["subject"];
         $id_user = $row["id_user"];
         $firstname = $row["firstname"];
+        $present = $row["present"];
 
         $id_enrollment = $row["id_enrollment"];
 
@@ -53,7 +54,11 @@ if ($result->num_rows > 0) {
                             <div class="col-md-2">
                                 <p class="card-text">' . $firstname . '</p>
                             </div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-2">
+                            <p class="card-text">' . $present . '</p>
+                            </div>
+
+                            <div class="col-md-2 text-center">
                                 <form action="" method="post" class="d-inline-block">
                                     <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
                                     <button type="submit" name="verwijder" class="btn btn-sm btn-primary">Verwijder</button>
@@ -83,7 +88,7 @@ if (isset($_POST['verwijder'])) {
     // Verwijder de inschrijving uit de enrollment-tabel
     $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
     if (mysqli_query($conn, $deleteQuery)) {
-        header("Location: cursus-beheer.php");
+        header("Location: inschrijvingen-beheer.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($conn);
@@ -145,6 +150,9 @@ $conn->close();
                                     <div class="col-md-2">
                                         <h5 class="text-main">Naam</h5>
                                     </div>
+                                    <div class="col-md-2">
+                                        <h5 class="text-main">Aanwezig</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -162,5 +170,4 @@ $conn->close();
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

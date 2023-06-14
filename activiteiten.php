@@ -18,13 +18,13 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch courses from the database
-$queryPart1 = "SELECT * FROM content WHERE page = 'homepage' AND part = 1";
+$queryPart1 = "SELECT * FROM content WHERE page = 'activiteiten' AND part = 1";
 $resultPart1 = mysqli_query($conn, $queryPart1);
 
-$queryPart2 = "SELECT * FROM content WHERE page = 'homepage' AND part = 2";
+$queryPart2 = "SELECT * FROM content WHERE page = 'activiteiten' AND part = 2";
 $resultPart2 = mysqli_query($conn, $queryPart2);
 
-$queryPart3 = "SELECT * FROM content WHERE page = 'homepage' AND part = 3";
+$queryPart3 = "SELECT * FROM content WHERE page = 'activiteiten' AND part = 3";
 $resultPart3 = mysqli_query($conn, $queryPart3);
 
 // Generate HTML for content
@@ -47,13 +47,14 @@ if ($resultPart1->num_rows > 0) {
                         ' . $title . '
                     </h1>
                 </div>
+
                 <p class="jumbotron-text col-md-7">
                     ' . $text . '
                 </p>
-                <!-- <div class="pt-4 pb-3">
-                    <a class="btn btn-primary btn-lg" href="#vereniging" role="button">Lees meer</a>
-                </div> -->
             </div>
+            <div class="col-md-6">
+            <img src="' . $img_url . '" width="100%" class="rounded-3" alt="Foto van een EHBO training" />
+        </div>
         </div>';
     }
 }
@@ -74,9 +75,6 @@ if ($resultPart2->num_rows > 0) {
                         <p class="text-secondary">
                             ' . $text . '
                         </p>
-                        <div class="pt-4 pb-3">
-                            <a class="btn btn-secondary btn-lg" href="wie-zijn-wij.html" role="button">Meer weten</a>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <img src="' . $img_url . '" width="100%" class="rounded-3" alt="Foto van een EHBO training" />
@@ -102,12 +100,10 @@ if ($resultPart3->num_rows > 0) {
                     <p class="text-main">
                         ' . $text . '
                     </p>
-                    <div class="pt-4 pb-3">
-                        <a class="btn btn-primary btn-lg" href="account-aanvragen.html" role="button"
-                            >Account aanvragen</a
-                        >
-                    </div>
                 </div>
+                <div class="col-md-6">
+                <img src="' . $img_url . '" width="100%" class="rounded-3" alt="Foto van een EHBO training" />
+            </div>
             </div>
         </div>';
     }
@@ -127,7 +123,8 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Website van KNV EHBO Tilburg." />
     <meta name="robots" content="index, follow" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
@@ -151,7 +148,9 @@ $conn->close();
     <!--Footer-->
     <div id="footer-placeholder"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

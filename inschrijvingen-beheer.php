@@ -16,7 +16,6 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch courses from the database
-// $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
 $query = "SELECT course.date, course.subject, enrollment.id_user, user.firstname, enrollment.id_enrollment, enrollment.present
             FROM enrollment
             JOIN course ON enrollment.id_course = course.id_course
@@ -33,10 +32,9 @@ if ($result->num_rows > 0) {
         $id_user = $row["id_user"];
         $firstname = $row["firstname"];
         $present = $row["present"];
-
         $id_enrollment = $row["id_enrollment"];
 
-        $isChecked = ($row['present'] == 1) ? 'checked' : '';
+        $isChecked = ($present == 1) ? 'checked' : '';
 
         $courseHTML = '
         <div class="row">
@@ -57,12 +55,12 @@ if ($result->num_rows > 0) {
                                 <p class="card-text">' . $firstname . '</p>
                             </div>
                             <div class="col-md-2">
-   <form method="POST" action="process.php">
-        <input type="checkbox" id="checkbox" name="checkbox" value="1" ' . $isChecked . '>
-        <input type="submit" value="Opslaan">
-    </form>                          
-              </div>
-
+                                <form method="POST" action="">
+                                    <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
+                                    <input type="checkbox" id="checkbox" name="present" value="1" ' . $isChecked . '>
+                                    <input type="submit" name="save" value="Opslaan">
+                                </form>
+                            </div>
                             <div class="col-md-2 text-center">
                                 <form action="" method="post" class="d-inline-block">
                                     <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
@@ -79,14 +77,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-// if (isset($_POST['Verwijder'])) {
-//     $id = $_POST['id'];
-//     $updateQuery = "UPDATE user SET approved = 1 WHERE id_user = $id";
-//     mysqli_query($conn, $updateQuery);
-//     // Redirect to the same page to refresh the content
-//     // header("Location: " . $_SERVER['PHP_SELF']);
-//     exit();
-// }
 if (isset($_POST['verwijder'])) {
     $id = $_POST['id_enrollment'];
 
@@ -98,26 +88,20 @@ if (isset($_POST['verwijder'])) {
     } else {
         echo "Error: " . mysqli_error($conn);
     }
-
 }
-if (isset($_POST['checkbox'])) {
-    $presentUpdate= $_POST['present'];
+
+if (isset($_POST['save'])) {
     $id = $_POST['id_enrollment'];
-    $id_user = $row["id_user"];
+    $present = (isset($_POST['present']) && $_POST['present'] == '1') ? 1 : 0;
 
-    if ($presentUpdate == '1') {
-        $userQuery =" UPDATE enrollment SET present = 0 WHERE id_user = $id_user";
-    } else {
-        $userQuery =" UPDATE enrollment SET present = 1 WHERE id_user = $id_user";
-        }
-
-    if (mysqli_query($conn, $userQuery)) {
+    // Update de present waarde in de enrollment-tabel
+    $updateQuery = "UPDATE enrollment SET present = $present WHERE id_enrollment = $id";
+    if (mysqli_query($conn, $updateQuery)) {
         header("Location: inschrijvingen-beheer.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($conn);
     }
-
 }
 
 // Close the database connection

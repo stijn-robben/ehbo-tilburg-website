@@ -31,7 +31,12 @@ if (mysqli_connect_errno()) {
 // $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
 
 // Fetch courses from the database along with the enrollment status
-$query = "SELECT c.*, e.id_enrollment FROM course AS c LEFT JOIN enrollment AS e ON c.id_course = e.id_course AND e.id_user = $id_user WHERE c.date >= CURDATE() ORDER BY c.date ASC";
+$query = "SELECT c.*, COUNT(e.id_enrollment) AS enrollments_count, e.id_enrollment 
+          FROM course AS c 
+          LEFT JOIN enrollment AS e ON c.id_course = e.id_course AND e.id_user = $id_user 
+          WHERE c.date >= CURDATE() 
+          GROUP BY c.id_course 
+          ORDER BY c.date ASC";
 
 $result = mysqli_query($conn, $query);
 
@@ -49,8 +54,8 @@ if ($result->num_rows > 0) {
         $subject = $row["subject"];
         $keywords = $row["keywords"];
         $max_enrollments = $row["max_enrollments"];
-        $enrollments = $row["enrollments"];
-        $enrollments_text = $enrollments . "/" . $max_enrollments;
+        $enrollments_count = $row["enrollments_count"];
+        $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
         if ($row["id_enrollment"]) {
             // User is already enrolled in the course, show "Uitschrijven" button

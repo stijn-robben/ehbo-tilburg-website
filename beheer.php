@@ -1,40 +1,18 @@
 <?php
-
 session_start();
-
-// $logFile = 'log.txt'; // File path for the log file
-
-// $logMessage = "before isset loggedin\n";
-// file_put_contents($logFile, $logMessage . PHP_EOL, FILE_APPEND);
-
-
-// file_put_contents($logFile, $_SESSION['loggedin'] . PHP_EOL, FILE_APPEND);
-
-// file_put_contents($logFile, "\n" . PHP_EOL, FILE_APPEND);
-
 
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin'])) {
     // User is not logged in, redirect to the login page
     header("Location: login.html");
-    exit(); // Stop further execution of the code
+    exit();
 }
-
-// file_put_contents($logFile, "before session role\n" . PHP_EOL, FILE_APPEND);
-// file_put_contents($logFile, "{$_SESSION['role']}" . PHP_EOL, FILE_APPEND);
-
 
 // Controleer of de gebruiker is ingelogd
 if (isset($_SESSION['role'])) {
-    echo "inside of isset role";
-    echo $_SESSION['role'];
     // Controleer of de gebruiker is ingelogd als admin
     if ($_SESSION['role'] === 'admin') {
-        // Gebruiker is ingelogd als admin, toon de beheerpagina
-        $message = "admin is role";
-        echo $message;
-?>
-
+        ?>
         <!DOCTYPE html>
         <html lang="en">
 
@@ -180,14 +158,12 @@ if (isset($_SESSION['role'])) {
 
         </html>
 
-<?php
-        exit(); // Stop de verdere uitvoering van de code
+        <?php
+        exit();
     }
 }
-// file_put_contents($logFile, "sesion is not set" . PHP_EOL, FILE_APPEND);
 
 // Gebruiker is niet ingelogd als admin of niet ingelogd, doorverwijzen naar de login-pagina
-header("Location: login.html");
+header("Location: login.php");
 exit();
-
 ?>

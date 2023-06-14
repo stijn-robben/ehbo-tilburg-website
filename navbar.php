@@ -27,7 +27,7 @@
                         <!-- <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 2</p></a> -->
                     </div>
                 </li>
-                <a class="nav-link" href="wie-zijn-wij.html">
+                <a class="nav-link" href="wie-zijn-wij.php">
                     <p class="text-secondary text-nav">Wie zijn wij</p>
                 </a>
                 <a class="nav-link" href="hulpverlening.html">

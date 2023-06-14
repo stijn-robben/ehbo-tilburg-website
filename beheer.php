@@ -73,7 +73,7 @@ if (isset($_SESSION['role'])) {
 
                     <a href="approved.php" class="pt-2 btn btn-primary btn-lg">Approved toevoegen</a>
 
-                    <a href="cursus-beheer.php" class="pt-2 btn btn-primary btn-lg">Enrollments Aanpassen</a>
+                    <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Enrollments Aanpassen</a>
 
                     <!-- Modal Cursus toevoegen -->
                     <div class="modal fade" id="cursusToevoegenModal" tabindex="-1" aria-labelledby="cursusToevoegenModalLabel" aria-hidden="true">

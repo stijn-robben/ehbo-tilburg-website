@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +16,7 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
-    <title>EHBO Tilburg - Approved</title>
+    <title>EHBO Tilburg - Account goedkeuren</title>
 </head>
 
 <body class="bg-light">
@@ -130,7 +133,7 @@
     <div class="jumbotron bg-jumbotron">
         <div class="container">
             <div class="container">
-                <p class="jumbotron-head h2-secondary">Approved</p>
+                <p class="jumbotron-head h2-secondary">Account goedkeuren</p>
             </div>
             <div class="container">
                 <div class="row">

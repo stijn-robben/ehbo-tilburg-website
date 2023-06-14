@@ -1,11 +1,11 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 ?>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-light fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="index.html" aria-label="To the homepage">
+        <a class="navbar-brand" href="index.php" aria-label="To the homepage">
             <img src="./img/logo.png" width="70" height="auto" alt="Logo van EHBO Tilburg" />
         </a>
 
@@ -19,32 +19,41 @@ session_start();
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="lidmaatschap.html">
+                <!-- Lidmaatschap -->
+                <a class="nav-link" href="lidmaatschap.php">
                     <p class="text-secondary text-nav">Lidmaatschap</p>
                 </a>
 
+                <!-- Opleidingen -->
                 <li class="nav-item dropdown nav-link">
                     <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                         data-bs-toggle="dropdown">Opleidingen</a>
                     <div class="dropdown-menu">
-                        <a href="activiteiten.html" class="dropdown-item text-secondary text-nav">
+                        <a href="activiteiten.php" class="dropdown-item text-secondary text-nav">
                             <p>Activiteiten</p>
                         </a>
-                        <!-- <a href="#" class="dropdown-item text-secondary text-nav"><p>Item 2</p></a> -->
                     </div>
                 </li>
 
+                <!-- Wie zijn wij -->
                 <a class="nav-link" href="wie-zijn-wij.php">
                     <p class="text-secondary text-nav">Wie zijn wij</p>
                 </a>
 
-                <a class="nav-link" href="hulpverlening.html">
+                <!-- Hulpverlening -->
+                <a class="nav-link" href="hulpverlening.php">
                     <p class="text-secondary text-nav">Hulpverlening</p>
                 </a>
 
+                <!-- Contact -->
+                <a class="nav-link" href="contact.php">
+                    <p class="text-secondary text-nav">Contact</p>
+                </a>
+
+                <!-- Overig -->
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
                     <?php if ($_SESSION['role'] != 'admin') : ?>
-                        <!-- Dropdown menu for logged-in non-admin users -->
+                        <!-- Dropdown menu voor leden -->
                         <li class="nav-item dropdown nav-link">
                             <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                                 data-bs-toggle="dropdown">Overig</a>
@@ -55,7 +64,7 @@ session_start();
                             </div>
                         </li>
                     <?php else : ?>
-                        <!-- Dropdown menu for logged-in admin users -->
+                        <!-- Dropdown menu voor admin -->
                         <li class="nav-item dropdown nav-link">
                             <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                                 data-bs-toggle="dropdown">Overig</a>
@@ -69,8 +78,13 @@ session_start();
                             </div>
                         </li>
                     <?php endif; ?>
+
+                    <!-- Uitloggen -->
+                    <div class="pt-2">
+                        <a class="btn btn-secondary btn-lg" href="uitloggen.php" role="button">Uitloggen</a>
+                    </div>
                 <?php else : ?>
-                    <!-- Dropdown menu for non-logged-in users -->
+                    <!-- Dropdown menu voor niet ingelogde gebruikers -->
                     <li class="nav-item dropdown nav-link">
                         <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                             data-bs-toggle="dropdown">Overig</a>
@@ -80,15 +94,12 @@ session_start();
                             </a>
                         </div>
                     </li>
+
+                    <!-- Inloggen -->
+                    <div class="pt-2">
+                        <a class="btn btn-secondary btn-lg" href="inloggen.php" role="button">Inloggen</a>
+                    </div>
                 <?php endif; ?>
-
-                <a class="nav-link" href="contact.html">
-                    <p class="text-secondary text-nav">Contact</p>
-                </a>
-
-                <div class="pt-2">
-                    <a class="btn btn-secondary btn-lg" href="login.php" role="button">Inloggen</a>
-                </div>
             </div>
         </div>
     </div>

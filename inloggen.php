@@ -44,11 +44,11 @@ if (isset($_POST['submit'])) {
             if ($approved == 1) {
                 if ($role == 'admin') {
                     $_SESSION['loggedin'] = true;
-                    header("Location: beheer.php");
+                    header("Location: index.php");
                     exit();
                 } else {
                     $_SESSION['loggedin'] = true;
-                    header("Location: index.html");
+                    header("Location: index.php");
                     exit();
                 }
             } else{
@@ -101,7 +101,7 @@ if (isset($_POST['submit'])) {
                 <p class="jumbotron-head h2-secondary">Inloggen</p>
             </div>
             <div class="container pt-5">
-                <form id="contact-form" class="login-form" action="login.php" method="POST" role="form">
+                <form id="contact-form" class="login-form" action="inloggen.php" method="POST" role="form">
                     <div class="form-group">
                         <label class="form-label text-main" for="id">Lidnummer</label>
                         <input type="text" class="form-control" id="id" name="id" placeholder="" required />
@@ -119,7 +119,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="btn-message pt-3">
                         <button class="pt-2 btn btn-primary btn-lg" type="submit" name="submit">Inloggen</button>
-                        <a href="account-aanvragen.html" class="pt-2 btn btn-primary btn-lg">Account aanvragen</a>
+                        <a href="account-aanvragen.php" class="pt-2 btn btn-primary btn-lg">Account aanvragen</a>
                         <br /><br />
                         <a
                             href="#"

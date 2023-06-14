@@ -36,6 +36,8 @@ if ($result->num_rows > 0) {
 
         $id_enrollment = $row["id_enrollment"];
 
+        $isChecked = ($row['present'] == 1) ? 'checked' : '';
+
         $courseHTML = '
         <div class="row">
             <div class="col">
@@ -55,8 +57,11 @@ if ($result->num_rows > 0) {
                                 <p class="card-text">' . $firstname . '</p>
                             </div>
                             <div class="col-md-2">
-                            <p class="card-text">' . $present . '</p>
-                            </div>
+   <form method="POST" action="process.php">
+        <input type="checkbox" id="checkbox" name="checkbox" value="1" ' . $isChecked . '>
+        <input type="submit" value="Opslaan">
+    </form>                          
+              </div>
 
                             <div class="col-md-2 text-center">
                                 <form action="" method="post" class="d-inline-block">
@@ -88,6 +93,25 @@ if (isset($_POST['verwijder'])) {
     // Verwijder de inschrijving uit de enrollment-tabel
     $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
     if (mysqli_query($conn, $deleteQuery)) {
+        header("Location: inschrijvingen-beheer.php");
+        exit();
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+
+}
+if (isset($_POST['checkbox'])) {
+    $presentUpdate= $_POST['present'];
+    $id = $_POST['id_enrollment'];
+    $id_user = $row["id_user"];
+
+    if ($presentUpdate == '1') {
+        $userQuery =" UPDATE enrollment SET present = 0 WHERE id_user = $id_user";
+    } else {
+        $userQuery =" UPDATE enrollment SET present = 1 WHERE id_user = $id_user";
+        }
+
+    if (mysqli_query($conn, $userQuery)) {
         header("Location: inschrijvingen-beheer.php");
         exit();
     } else {
@@ -170,4 +194,5 @@ $conn->close();
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

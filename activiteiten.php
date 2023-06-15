@@ -52,9 +52,6 @@ if ($resultPart1->num_rows > 0) {
                     ' . $text . '
                 </p>
             </div>
-            <div class="col-md-6">
-            <img src="' . $img_url . '" width="100%" class="rounded-3" alt="Foto van een EHBO training" />
-        </div>
         </div>';
     }
 }
@@ -101,9 +98,6 @@ if ($resultPart3->num_rows > 0) {
                         ' . $text . '
                     </p>
                 </div>
-                <div class="col-md-6">
-                <img src="' . $img_url . '" width="100%" class="rounded-3" alt="Foto van een EHBO training" />
-            </div>
             </div>
         </div>';
     }

@@ -166,4 +166,4 @@ if (isset($_SESSION['role'])) {
 // Gebruiker is niet ingelogd als admin of niet ingelogd, doorverwijzen naar de login-pagina
 header("Location: login.php");
 exit();
-?>
+?>  

@@ -18,7 +18,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Fetch courses from the database
-$queryPart1 = "SELECT * FROM content WHERE page = 'wie_zijn_wij';";
+$queryPart1 = "SELECT * FROM content WHERE page = 'wie_zijn_wij'";
 $resultPart1 = mysqli_query($conn, $queryPart1);
 
 // Generate HTML for content

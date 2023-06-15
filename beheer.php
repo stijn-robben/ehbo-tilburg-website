@@ -79,7 +79,7 @@ if (isset($_SESSION['role'])) {
                                         <div class="form-group">
                                             <label class="form-label text-secondary" for="max_enrollments">Maximum aantal
                                                 inschrijvingen:</label>
-                                            <input type="number" id="max_enrollments" class="form-control popup-form" name="enrollments" required /><br /><br />
+                                            <input type="number" id="max_enrollments" class="form-control popup-form" name="max_enrollments" required /><br /><br />
                                         </div>
                                         <div class="btn-message pt-3">
                                             <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Cursus

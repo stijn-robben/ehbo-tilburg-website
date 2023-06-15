@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin'])) {
     // User is not logged in, redirect to the login page
-    header("Location: login.html");
+    header("Location: inloggen.php");
     exit();
 }
 
@@ -49,7 +49,7 @@ if (isset($_SESSION['role'])) {
                         Content toevoegen
                     </button>
 
-                    <a href="approved.php" class="pt-2 btn btn-primary btn-lg">Approved toevoegen</a>
+                    <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Approved toevoegen</a>
 
                     <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Enrollments Aanpassen</a>
 
@@ -166,4 +166,4 @@ if (isset($_SESSION['role'])) {
 // Gebruiker is niet ingelogd als admin of niet ingelogd, doorverwijzen naar de login-pagina
 header("Location: login.php");
 exit();
-?>  
+?>

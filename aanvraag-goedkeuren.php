@@ -16,7 +16,7 @@ session_start();
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
-    <title>EHBO Tilburg - Account goedkeuren</title>
+    <title>EHBO Tilburg - Aanvraag goedkeuren</title>
 </head>
 
 <body class="bg-light">
@@ -47,13 +47,6 @@ session_start();
     $coursesHTML = "";
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            // $date = date('d-m-Y', strtotime($row["date"]));
-            // $subject = $row["subject"];
-            // $keywords = $row["keywords"];
-            // $max_enrollments = $row["max_enrollments"];
-            // $enrollments = $row["enrollments"];
-            // $enrollments_text = $enrollments . "/" . $max_enrollments;
-    
             $id = $row['id_user'];
             $voornaam = $row['firstname'];
             $achternaam = $row['lastname'];
@@ -133,7 +126,7 @@ session_start();
     <div class="jumbotron bg-jumbotron">
         <div class="container">
             <div class="container">
-                <p class="jumbotron-head h2-secondary">Account goedkeuren</p>
+                <p class="jumbotron-head h2-secondary">Aanvragen</p>
             </div>
             <div class="container">
                 <div class="row">

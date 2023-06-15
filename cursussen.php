@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin'])) {
     // User is not logged in, redirect to the login page
-    header("Location: login.html");
+    header("Location: inloggen.php");
     exit();
 }
 
@@ -72,18 +72,26 @@ if ($result->num_rows > 0) {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <p class="card-text">' . $date . '</p>
+                            <span class="card-text d-lg-none">Datum: </span><span class="card-text">' . $date . '</span>
+
                             </div>
                             <div class="col-md-2">
-                                <p class="card-text">' . $subject . '</p>
+                            <span class="card-text d-lg-none">Onderwerp: </span><span class="card-text">' . $subject . '</span>
                             </div>
                             <div class="col-md-3">
-                                <p class="card-text">' . $keywords . '</p>
+                                <span class="card-text d-lg-none">Competenties: </span><span class="card-text">' . $keywords . '</span>
                             </div>
                             <div class="col-md-2">
-                                <p class="card-text">' . $enrollments_text . '</p>
+                            <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
                             </div>
-                            <div class="col-md-3 text-center">
+                            <div class="col-md-3 text-center d-none d-lg-block">
+                            <form method="post" action="enroll.php">
+                                <input type="hidden" name="id_course" value="' . $id_course . '">
+                                <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
+                                <button type="submit" class="btn btn-sm btn-primary" name="submit">' . $buttonLabel . '</button>
+                            </form>
+                        </div>
+                        <div class="col-md-3 text-center d-lg-none">
                             <form method="post" action="enroll.php">
                                 <input type="hidden" name="id_course" value="' . $id_course . '">
                                 <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
@@ -136,7 +144,7 @@ $conn->close();
                 <p class="jumbotron-head h2-secondary">Cursussen</p>
             </div>
             <div class="container">
-                <div class="row">
+                <div class="row d-none d-lg-block">
                     <div class="col">
                         <div class="card mb-3">
                             <div class="card-body">

@@ -27,13 +27,13 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-// Fetch courses from the database
-// $query = "SELECT * FROM course WHERE date >= CURDATE() ORDER BY date ASC";
-
-// Fetch courses from the database along with the enrollment status
-$query = "SELECT c.*, COUNT(e.id_enrollment) AS enrollments_count, e.id_enrollment 
+// Fetch courses from the database along with the enrollment count
+// Fetch courses from the database along with the enrollment count
+$query = "SELECT c.*, COUNT(e.id_enrollment) AS enrollments_count, 
+          COUNT(en.id_enrollment) AS user_enrollments_count
           FROM course AS c 
-          LEFT JOIN enrollment AS e ON c.id_course = e.id_course AND e.id_user = $id_user 
+          LEFT JOIN enrollment AS e ON c.id_course = e.id_course 
+          LEFT JOIN enrollment AS en ON c.id_course = en.id_course AND en.id_user = $id_user
           WHERE c.date >= CURDATE() 
           GROUP BY c.id_course 
           ORDER BY c.date ASC";
@@ -54,25 +54,36 @@ if ($result->num_rows > 0) {
         $subject = $row["subject"];
         $keywords = $row["keywords"];
         $max_enrollments = $row["max_enrollments"];
+        
+        // Fetch the enrollment count for the current user and course
+        $enrollments_query = "SELECT COUNT(*) AS user_enrollments_count
+                              FROM enrollment 
+                              WHERE id_course = $id_course AND id_user = $id_user";
+        $enrollments_result = mysqli_query($conn, $enrollments_query);
+
+        if (!$enrollments_result) {
+            echo "Query error: " . mysqli_error($conn);
+            exit();
+        }
+        
         $enrollments_count = $row["enrollments_count"];
         $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
-        // Check if the maximum enrollments limit has been reached or if the user is already enrolled
-        if ($enrollments_count >= $max_enrollments || $row["id_enrollment"]) {
-            // Maximum enrollments limit reached or user is already enrolled, show "Uitschrijven" button
+        if ($row["user_enrollments_count"]) {
+            // User is already enrolled in the course, show "Uitschrijven" button
             $buttonLabel = "Uitschrijven";
+            $buttonDisabled = false;
         } else {
-            // Maximum enrollments limit not reached and user is not enrolled, show "Inschrijven" button
-            $buttonLabel = "Inschrijven";
-        }
-
-        // Check if the maximum enrollments limit has been reached
-        if ($enrollments_count >= $max_enrollments) {
-            // Maximum enrollments limit reached, disable the enrollment button
-            $buttonDisabled = 'disabled';
-        } else {
-            // Maximum enrollments limit not reached, enable the enrollment button
-            $buttonDisabled = '';
+            // User is not enrolled in the course
+            if ($enrollments_count < $max_enrollments) {
+                // Maximum enrollments limit not reached, show "Inschrijven" button
+                $buttonLabel = "Inschrijven";
+                $buttonDisabled = false;
+            } else {
+                // Maximum enrollments limit reached, show disabled button
+                $buttonLabel = "Max. inschrijvingen bereikt";
+                $buttonDisabled = true;
+            }
         }
 
         $courseHTML = '
@@ -82,32 +93,24 @@ if ($result->num_rows > 0) {
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
-                            <span class="card-text d-lg-none">Datum: </span><span class="card-text">' . $date . '</span>
-
+                                <span class="card-text d-lg-none">Datum: </span><span class="card-text">' . $date . '</span>
                             </div>
                             <div class="col-md-2">
-                            <span class="card-text d-lg-none">Onderwerp: </span><span class="card-text">' . $subject . '</span>
+                                <span class="card-text d-lg-none">Onderwerp: </span><span class="card-text">' . $subject . '</span>
                             </div>
                             <div class="col-md-3">
                                 <span class="card-text d-lg-none">Competenties: </span><span class="card-text">' . $keywords . '</span>
                             </div>
                             <div class="col-md-2">
-                            <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
+                                <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
                             </div>
                             <div class="col-md-3 text-center d-none d-lg-block">
-                            <form method="post" action="enroll.php">
-                                <input type="hidden" name="id_course" value="' . $id_course . '">
-                                <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
-                                <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . $buttonDisabled . '>' . $buttonLabel . '</button>
-                            </form>
-                        </div>
-                        <div class="col-md-3 text-center d-lg-none">
-                            <form method="post" action="enroll.php">
-                                <input type="hidden" name="id_course" value="' . $id_course . '">
-                                <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
-                                <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . $buttonDisabled . '>' . $buttonLabel . '</button>
-                            </form>
-                        </div>
+                                <form method="post" action="inschrijven-uitschrijven.php">
+                                    <input type="hidden" name="id_course" value="' . $id_course . '">
+                                    <input type="hidden" name="id_user" value="' . $id_user . '">
+                                    <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . ($buttonDisabled ? "disabled" : "") . '>' . $buttonLabel . '</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

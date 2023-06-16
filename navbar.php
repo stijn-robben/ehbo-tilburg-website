@@ -50,10 +50,9 @@ session_start();
                     <p class="text-secondary text-nav">Contact</p>
                 </a>
 
-                <!-- Overig -->
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) : ?>
                     <?php if ($_SESSION['role'] != 'admin') : ?>
-                        <!-- Dropdown menu voor leden -->
+                        <!-- Overig for members -->
                         <li class="nav-item dropdown nav-link">
                             <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                                 data-bs-toggle="dropdown">Overig</a>
@@ -64,7 +63,7 @@ session_start();
                             </div>
                         </li>
                     <?php else : ?>
-                        <!-- Dropdown menu voor admin -->
+                        <!-- Overig for admins -->
                         <li class="nav-item dropdown nav-link">
                             <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
                                 data-bs-toggle="dropdown">Overig</a>
@@ -84,18 +83,7 @@ session_start();
                         <a class="btn btn-secondary btn-lg" href="uitloggen.php" role="button">Uitloggen</a>
                     </div>
                 <?php else : ?>
-                    <!-- Dropdown menu voor niet ingelogde gebruikers -->
-                    <li class="nav-item dropdown nav-link">
-                        <a href="#" class="nav-link dropdown-toggle text-secondary text-nav navbar-dropdown"
-                            data-bs-toggle="dropdown">Overig</a>
-                        <div class="dropdown-menu">
-                            <a href="#" class="dropdown-item text-secondary text-nav">
-                                <p>Item 1</p>
-                            </a>
-                        </div>
-                    </li>
-
-                    <!-- Inloggen -->
+                    <!-- Inloggen for non-logged-in users -->
                     <div class="pt-2">
                         <a class="btn btn-secondary btn-lg" href="inloggen.php" role="button">Inloggen</a>
                     </div>

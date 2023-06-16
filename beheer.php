@@ -49,7 +49,7 @@ if (isset($_SESSION['role'])) {
                         Content toevoegen
                     </button>
 
-                    <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Approved toevoegen</a>
+                    <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Aanvragen</a>
 
                     <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Enrollments Aanpassen</a>
 

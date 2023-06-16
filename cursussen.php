@@ -57,12 +57,22 @@ if ($result->num_rows > 0) {
         $enrollments_count = $row["enrollments_count"];
         $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
-        if ($row["id_enrollment"]) {
-            // User is already enrolled in the course, show "Uitschrijven" button
+        // Check if the maximum enrollments limit has been reached or if the user is already enrolled
+        if ($enrollments_count >= $max_enrollments || $row["id_enrollment"]) {
+            // Maximum enrollments limit reached or user is already enrolled, show "Uitschrijven" button
             $buttonLabel = "Uitschrijven";
         } else {
-            // User is not enrolled in the course, show "Inschrijven" button
+            // Maximum enrollments limit not reached and user is not enrolled, show "Inschrijven" button
             $buttonLabel = "Inschrijven";
+        }
+
+        // Check if the maximum enrollments limit has been reached
+        if ($enrollments_count >= $max_enrollments) {
+            // Maximum enrollments limit reached, disable the enrollment button
+            $buttonDisabled = 'disabled';
+        } else {
+            // Maximum enrollments limit not reached, enable the enrollment button
+            $buttonDisabled = '';
         }
 
         $courseHTML = '
@@ -88,14 +98,14 @@ if ($result->num_rows > 0) {
                             <form method="post" action="enroll.php">
                                 <input type="hidden" name="id_course" value="' . $id_course . '">
                                 <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
-                                <button type="submit" class="btn btn-sm btn-primary" name="submit">' . $buttonLabel . '</button>
+                                <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . $buttonDisabled . '>' . $buttonLabel . '</button>
                             </form>
                         </div>
                         <div class="col-md-3 text-center d-lg-none">
                             <form method="post" action="enroll.php">
                                 <input type="hidden" name="id_course" value="' . $id_course . '">
                                 <input type="hidden" name="id_enrollment" value="' . $row["id_enrollment"] . '">
-                                <button type="submit" class="btn btn-sm btn-primary" name="submit">' . $buttonLabel . '</button>
+                                <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . $buttonDisabled . '>' . $buttonLabel . '</button>
                             </form>
                         </div>
                         </div>

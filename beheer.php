@@ -51,7 +51,7 @@ if (isset($_SESSION['role'])) {
 
                     <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Aanvragen</a>
 
-                    <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Enrollments Aanpassen</a>
+                    <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Inschrijvingen</a>
 
                     <!-- Modal Cursus toevoegen -->
                     <div class="modal fade" id="cursusToevoegenModal" tabindex="-1" aria-labelledby="cursusToevoegenModalLabel" aria-hidden="true">
@@ -99,12 +99,12 @@ if (isset($_SESSION['role'])) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title text-secondary" id="contentToevoegenModalLabel">Content toevoegen</h5>
+                            <h5 class="modal-title text-secondary" id="contentToevoegenModalLabel">Content beheren</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Content toevoegen form -->
-                            <form id="" class="" action="content-toevoegen.php" method="POST" role="form">
+                            <form id="" class="" action="content-beheren.php" method="POST" role="form">
                                 <div class="form-group">
                                     <label class="form-label text-secondary" for="page">Pagina:</label>
                                     <select id="page" class="form-control popup-form" name="page" required>

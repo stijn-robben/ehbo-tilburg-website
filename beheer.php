@@ -51,8 +51,6 @@ if (isset($_SESSION['role'])) {
 
                     <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Aanvragen</a>
 
-                    <a href="inschrijvingen-beheer.php" class="pt-2 btn btn-primary btn-lg">Inschrijvingen</a>
-
                     <!-- Modal Cursus toevoegen -->
                     <div class="modal fade" id="cursusToevoegenModal" tabindex="-1" aria-labelledby="cursusToevoegenModalLabel" aria-hidden="true">
                         <div class="modal-dialog">

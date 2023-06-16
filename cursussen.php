@@ -69,22 +69,30 @@ if ($result->num_rows > 0) {
         $enrollments_count = $row["enrollments_count"];
         $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
-        if ($row["user_enrollments_count"]) {
-            // User is already enrolled in the course, show "Uitschrijven" button
-            $buttonLabel = "Uitschrijven";
+        if ($_SESSION['role'] == 'admin') {
+            // User is admin, show "Beheer cursus" button
+            $buttonLabel = "Beheer cursus";
             $buttonDisabled = false;
+            $buttonAction = "inschrijvingen.php";
         } else {
-            // User is not enrolled in the course
-            if ($enrollments_count < $max_enrollments) {
-                // Maximum enrollments limit not reached, show "Inschrijven" button
-                $buttonLabel = "Inschrijven";
+            if ($row["user_enrollments_count"]) {
+                // User is already enrolled in the course, show "Uitschrijven" button
+                $buttonLabel = "Uitschrijven";
                 $buttonDisabled = false;
             } else {
-                // Maximum enrollments limit reached, show disabled button
-                $buttonLabel = "Max. inschrijvingen bereikt";
-                $buttonDisabled = true;
+                // User is not enrolled in the course
+                if ($enrollments_count < $max_enrollments) {
+                    // Maximum enrollments limit not reached, show "Inschrijven" button
+                    $buttonLabel = "Inschrijven";
+                    $buttonDisabled = false;
+                } else {
+                    // Maximum enrollments limit reached, show disabled button
+                    $buttonLabel = "Max. inschrijvingen bereikt";
+                    $buttonDisabled = true;
+                }
             }
-        }
+            $buttonAction = "inschrijven-uitschrijven.php";
+        }        
 
         $courseHTML = '
         <div class="row">

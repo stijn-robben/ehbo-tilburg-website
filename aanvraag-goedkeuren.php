@@ -67,9 +67,6 @@ session_start();
                                 <div class="col-md-3">
                                     <p class="card-text">' . $achternaam . '</p>
                                 </div>
-                                <div class="col-md-2">
-                                    <p class="card-text">' . $approved . '</p>
-                                </div>
                                 <div class="col-md-3 text-center">
                                     <form action="" method="post" class="d-inline-block">
                                         <input type="hidden" name="id" value="' . $id . '">
@@ -135,16 +132,13 @@ session_start();
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <h5 class="text-main">Id</h5>
+                                        <h5 class="text-main">Lidnummer</h5>
                                     </div>
                                     <div class="col-md-2">
                                         <h5 class="text-main">Voornaam</h5>
                                     </div>
                                     <div class="col-md-3">
                                         <h5 class="text-main">Achternaam</h5>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <h5 class="text-main">Approved</h5>
                                     </div>
                                 </div>
                             </div>

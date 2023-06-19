@@ -8,7 +8,6 @@ if (!isset($_SESSION['loggedin'])) {
     exit();
 }
 
-// Controleer of de gebruiker is ingelogd
 if (isset($_SESSION['role'])) {
     // Controleer of de gebruiker is ingelogd als admin
     if ($_SESSION['role'] === 'admin') {
@@ -39,24 +38,18 @@ if (isset($_SESSION['role'])) {
                     <div class="container">
                         <p class="jumbotron-head h2-secondary">Beheer</p>
                     </div>
+
                     <!-- Cursus toevoegen button -->
                     <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#cursusToevoegenModal">
                         Cursus toevoegen
                     </button>
-
-                    <!-- Content toevoegen button -->
-                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contentToevoegenModal">
-                        Content toevoegen
-                    </button>
-
-                    <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Aanvragen</a>
 
                     <!-- Modal Cursus toevoegen -->
                     <div class="modal fade" id="cursusToevoegenModal" tabindex="-1" aria-labelledby="cursusToevoegenModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-secondary" id="cursusToevoegenModalLabel">Cursus toevoegen</h5>
+                                    <h5 class="modal-title text-secondary" id="cursusToevoegenModalLabel">Cursus beheren</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -88,64 +81,166 @@ if (isset($_SESSION['role'])) {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
+                    <!-- Evenement toevoegen button -->
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#evenementToevoegenModal">
+                        Evenement toevoegen
+                    </button>
 
-            <!-- Modal Content toevoegen -->
-            <div class="modal fade" id="contentToevoegenModal" tabindex="-1" aria-labelledby="contentToevoegenModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-secondary" id="contentToevoegenModalLabel">Content beheren</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Content toevoegen form -->
-                            <form id="" class="" action="content-beheren.php" method="POST" role="form">
-                                <div class="form-group">
-                                    <label class="form-label text-secondary" for="page">Pagina:</label>
-                                    <select id="page" class="form-control popup-form" name="page" required>
-                                        <option value="homepage">Homepage</option>
-                                        <option value="lidmaatschap">Lidmaatschap</option>
-                                        <option value="activiteiten">Activiteiten</option>
-                                        <option value="wie-zijn-wij">Wie zijn wij</option>
-                                        <option value="hulpverlening">Hulpverlening</option>
-                                        <!-- Voeg andere pagina-opties toe indien nodig -->
-                                    </select><br /><br />
+                    <!-- Modal Evenement toevoegen -->
+                    <div class="modal fade" id="evenementToevoegenModal" tabindex="-1" aria-labelledby="evenementToevoegenModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-secondary" id="evenementToevoegenModalLabel">Evenement toevoegen</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label text-secondary" for="part">Onderdeel:</label>
-                                    <select id="part" class="form-control popup-form" name="part" required>
-                                        <option value="1">Onderdeel 1</option>
-                                        <option value="2">Onderdeel 2</option>
-                                        <option value="3">Onderdeel 3</option>
-                                        <!-- Voeg andere onderdeel-opties toe indien nodig -->
-                                    </select><br /><br />
+                                <div class="modal-body">
+                                    <!-- Evenement toevoegen form -->
+                                    <form id="" class="" action="evenement-toevoegen.php" method="POST" role="form">
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="name">Naam:</label>
+                                            <input type="text" id="name" class="form-control popup-form" name="name" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="location">Locatie:</label>
+                                            <input type="text" id="location" class="form-control popup-form" name="location" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="date">Datum:</label>
+                                            <input type="date" id="date" class="form-control popup-form" name="date" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="start_time">Starttijd:</label>
+                                            <input type="time" id="start_time" class="form-control popup-form" name="start_time" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="end_time">Eindtijd:</label>
+                                            <input type="time" id="end_time" class="form-control popup-form" name="end_time" required /><br /><br />
+                                        </div>
+                                        <div class="btn-message pt-3">
+                                            <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Evenement toevoegen</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label text-secondary" for="title">Titel:</label>
-                                    <input type="text" id="title" class="form-control popup-form" name="title" required /><br /><br />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-secondary" for="text">Tekst:</label>
-                                    <textarea id="text" class="form-control popup-form" name="text" rows="8" required></textarea><br /><br />
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-secondary" for="img_url">Afbeeldings-URL:</label>
-                                    <input type="text" id="img_url" class="form-control popup-form" name="img_url" required /><br /><br />
-                                </div>
-                                <div class="btn-message pt-3">
-                                    <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Content
-                                        toevoegen</button>
-                                </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Content toevoegen button -->
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contentToevoegenModal">
+                        Content toevoegen
+                    </button>
+
+                    <!-- Modal Content toevoegen -->
+                    <div class="modal fade" id="contentToevoegenModal" tabindex="-1" aria-labelledby="contentToevoegenModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-secondary" id="contentToevoegenModalLabel">Content beheren</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Content toevoegen form -->
+                                    <form id="" class="" action="content-beheren.php" method="POST" role="form">
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="page">Pagina:</label>
+                                            <select id="page" class="form-control popup-form" name="page" required>
+                                                <option value="homepage">Homepage</option>
+                                                <option value="lidmaatschap">Lidmaatschap</option>
+                                                <option value="activiteiten">Activiteiten</option>
+                                                <option value="wie-zijn-wij">Wie zijn wij</option>
+                                                <option value="hulpverlening">Hulpverlening</option>
+                                                <!-- Voeg andere pagina-opties toe indien nodig -->
+                                            </select><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="part">Onderdeel:</label>
+                                            <select id="part" class="form-control popup-form" name="part" required>
+                                                <option value="1">Onderdeel 1</option>
+                                                <option value="2">Onderdeel 2</option>
+                                                <option value="3">Onderdeel 3</option>
+                                                <!-- Voeg andere onderdeel-opties toe indien nodig -->
+                                            </select><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="title">Titel:</label>
+                                            <input type="text" id="title" class="form-control popup-form" name="title" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="text">Tekst:</label>
+                                            <textarea id="text" class="form-control popup-form" name="text" rows="8" required></textarea><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="img_url">Afbeeldings-URL:</label>
+                                            <input type="text" id="img_url" class="form-control popup-form" name="img_url" required /><br /><br />
+                                        </div>
+                                        <div class="btn-message pt-3">
+                                            <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Content
+                                                toevoegen</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content toevoegen button -->
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#teamAanpassenModal">
+                        Team aanpassen
+                    </button>
+
+                    <!-- Modal Team aanpassen -->
+                    <div class="modal fade" id="teamAanpassenModal" tabindex="-1" aria-labelledby="teamAanpassenModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-secondary" id="teamAanpassenModalLabel">Team aanpassen</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Team aanpassen form -->
+                                    <form id="" class="" action="team-aanpassen.php" method="POST" role="form">
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="id_team">Teamlid:</label>
+                                            <select id="id_team" class="form-control popup-form" name="id_team" required>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <!-- Voeg andere pagina-opties toe indien nodig -->
+                                            </select><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="name">Name:</label>
+                                            <input type="text" id="name" class="form-control popup-form" name="name" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="email">E-mail:</label>
+                                            <textarea id="email" class="form-control popup-form" name="email" rows="8" required></textarea><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="text">Tekst:</label>
+                                            <input type="text" id="text" class="form-control popup-form" name="text" required /><br /><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-secondary" for="img_url">Afbeeldings-URL:</label>
+                                            <input type="text" id="img_url" class="form-control popup-form" name="img_url" required /><br /><br />
+                                        </div>
+                                        <div class="btn-message pt-3">
+                                            <button class="pt-2 btn btn-secondary btn-lg" type="submit" name="submit">Team
+                                                aanpassen</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="aanvraag-goedkeuren.php" class="pt-2 btn btn-primary btn-lg">Aanvragen overzicht</a>
                 </div>
-            </div>
-            </div>
             </div>
 
             <!--Footer-->

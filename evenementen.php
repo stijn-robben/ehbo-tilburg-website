@@ -27,16 +27,14 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-// Fetch courses from the database along with the enrollment count
-// Fetch courses from the database along with the enrollment count
-$query = "SELECT c.*, COUNT(e.id_enrollment) AS enrollments_count, 
+// Fetch events from the database along with the enrollment count
+$query = "SELECT e.*, COUNT(en.id_enrollment) AS enrollments_count, 
           COUNT(en.id_enrollment) AS user_enrollments_count
-          FROM course AS c 
-          LEFT JOIN enrollment AS e ON c.id_course = e.id_course 
-          LEFT JOIN enrollment AS en ON c.id_course = en.id_course AND en.id_user = $id_user
-          WHERE c.date >= CURDATE() 
-          GROUP BY c.id_course 
-          ORDER BY c.date ASC";
+          FROM event AS e 
+          LEFT JOIN enrollment AS en ON e.id_event = en.id_event AND en.id_user = $id_user
+          WHERE e.date >= CURDATE() 
+          GROUP BY e.id_event 
+          ORDER BY e.date ASC";
 
 $result = mysqli_query($conn, $query);
 
@@ -45,70 +43,65 @@ if (!$result) {
     exit();
 }
 
-// Generate HTML for courses
-$coursesHTML = "";
+// Generate HTML for events
+$eventsHTML = "";
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $id_course = $row["id_course"];
+        $id_event = $row["id_event"];
+        $name = $row["name"];
+        $location = $row["location"];
         $date = date('d-m-Y', strtotime($row["date"]));
-        $subject = $row["subject"];
-        $keywords = $row["keywords"];
-        $max_enrollments = $row["max_enrollments"];
+        $start_time = $row["start_time"];
+        $end_time = $row["end_time"];
         
-        // Fetch the enrollment count for the current user and course
+        // Fetch the enrollment count for the current user and event
         $enrollments_query = "SELECT COUNT(*) AS user_enrollments_count
                               FROM enrollment 
-                              WHERE id_course = $id_course AND id_user = $id_user";
+                              WHERE id_event = $id_event AND id_user = $id_user";
         $enrollments_result = mysqli_query($conn, $enrollments_query);
 
         if (!$enrollments_result) {
             echo "Query error: " . mysqli_error($conn);
             exit();
         }
-        
-        $enrollments_count = $row["enrollments_count"];
-        $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
         if ($_SESSION['role'] == 'admin') {
             // User is admin, show "Beheer" link
             $linkLabel = "Beheer";
-            $linkAction = "cursus-beheer.php?id_course=" . $id_course;
+            $linkAction = "evenement-beheer.php?id_event=" . $id_event;
         } else {
             if ($row["user_enrollments_count"]) {
-                // User is already enrolled in the course, show "Uitschrijven" link
+                // User is already enrolled in the event, show "Uitschrijven" link
                 $linkLabel = "Uitschrijven";
             } else {
-                // User is not enrolled in the course
-                if ($enrollments_count < $max_enrollments) {
-                    // Maximum enrollments limit not reached, show "Inschrijven" link
-                    $linkLabel = "Inschrijven";
-                } else {
-                    // Maximum enrollments limit reached, show disabled link
-                    $linkLabel = "Maximum bereikt";
-                }
+                // User is not enrolled in the event
+                $linkLabel = "Inschrijven";
             }
-            $linkAction = "cursus-inschrijven-uitschrijven.php?id_course=" . $id_course;
+            $linkAction = "evenement-inschrijven-uitschrijven.php?id_event=" . $id_event;
         }      
 
-        $courseHTML = '
+        $eventHTML = '
         <div class="row">
             <div class="col">
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-2">
+                                <span class="card-text d-lg-none">Naam: </span><span class="card-text">' . $name . '</span>
+                            </div>
+                            <div class="col-md-2">
                                 <span class="card-text d-lg-none">Datum: </span><span class="card-text">' . $date . '</span>
                             </div>
                             <div class="col-md-2">
-                                <span class="card-text d-lg-none">Onderwerp: </span><span class="card-text">' . $subject . '</span>
-                            </div>
-                            <div class="col-md-3">
-                                <span class="card-text d-lg-none">Competenties: </span><span class="card-text">' . $keywords . '</span>
+                                <span class="card-text d-lg-none">Locatie: </span><span class="card-text">' . $location . '</span>
                             </div>
                             <div class="col-md-2">
-                                <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
+                                <span class="card-text d-lg-none">Starttijd: </span><span class="card-text">' . $start_time . '</span>
                             </div>
-                            <div class="col-md-3 text-center d-none d-lg-block">
+                            <div class="col-md-2">
+                                <span class="card-text d-lg-none">Eindtijd: </span><span class="card-text">' . $end_time . '</span>
+                            </div>
+                            <div class="col-md-2 text-center d-none d-lg-block">
                                 <a href="' . $linkAction . '" class="btn btn-sm btn-primary' . ($linkLabel === "Maximum bereikt" ? " disabled" : "") . '">' . $linkLabel . '</a>
                             </div>
                         </div>
@@ -117,7 +110,7 @@ if ($result->num_rows > 0) {
             </div>
         </div>';
 
-        $coursesHTML .= $courseHTML;
+        $eventsHTML .= $eventHTML;
     }
 }
 
@@ -138,7 +131,7 @@ $conn->close();
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="icon" type="image/x-icon" href="/img/s.png" />
     <script defer src="./js/script.js"></script>
-    <title>EHBO Tilburg - Cursussen</title>
+    <title>EHBO Tilburg - Evenementen</title>
 </head>
 
 <body class="bg-light">
@@ -150,11 +143,11 @@ $conn->close();
         <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button"> Ga terug </a>
     </div>
 
-    <!-- Cursussen -->
+    <!-- Evenementen -->
     <div class="jumbotron bg-jumbotron pb-5">
         <div class="container">
             <div class="container">
-                <p class="jumbotron-head h2-secondary">Cursussen</p>
+                <p class="jumbotron-head h2-secondary">Evenementen</p>
             </div>
             <div class="container">
                 <div class="row d-none d-lg-block">
@@ -163,23 +156,26 @@ $conn->close();
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
+                                        <h5 class="text-main">Naam</h5>
+                                    </div>
+                                    <div class="col-md-2">
                                         <h5 class="text-main">Datum</h5>
                                     </div>
                                     <div class="col-md-2">
-                                        <h5 class="text-main">Onderwerp</h5>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5 class="text-main">Competenties</h5>
+                                        <h5 class="text-main">Locatie</h5>
                                     </div>
                                     <div class="col-md-2">
-                                        <h5 class="text-main">Aantal inschrijvingen</h5>
+                                        <h5 class="text-main">Starttijd</h5>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <h5 class="text-main">Eindtijd</h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php echo $coursesHTML; ?>
+                <?php echo $eventsHTML; ?>
             </div>
         </div>
     </div>

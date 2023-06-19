@@ -60,7 +60,11 @@ session_start();
                                 <a href="cursussen.php" class="dropdown-item text-secondary text-nav">
                                     <p>Cursussen</p>
                                 </a>
+                                <a href="evenementen.php" class="dropdown-item text-secondary text-nav">
+                                    <p>Evenementen</p>
+                                </a>
                             </div>
+                            
                         </li>
                     <?php else : ?>
                         <!-- Overig for admins -->
@@ -70,6 +74,9 @@ session_start();
                             <div class="dropdown-menu">
                                 <a href="cursussen.php" class="dropdown-item text-secondary text-nav">
                                     <p>Cursussen</p>
+                                </a>
+                                <a href="evenementen.php" class="dropdown-item text-secondary text-nav">
+                                    <p>Evenementen</p>
                                 </a>
                                 <a href="beheer.php" class="dropdown-item text-secondary text-nav">
                                     <p>Beheer</p>

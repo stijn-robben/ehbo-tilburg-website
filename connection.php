@@ -13,4 +13,7 @@ session_start();
     catch(PDOExeption $e){
         die("Error connecting: ".$e->getMessage());
     }
+
+    header("Location: inloggen.php");
+    exit();
 ?>

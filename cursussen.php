@@ -70,29 +70,25 @@ if ($result->num_rows > 0) {
         $enrollments_text = $enrollments_count . "/" . $max_enrollments;
 
         if ($_SESSION['role'] == 'admin') {
-            // User is admin, show "Beheer cursus" button
-            $buttonLabel = "Beheer cursus";
-            $buttonDisabled = false;
-            $buttonAction = "inschrijvingen.php";
+            // User is admin, show "Beheer cursus" link
+            $linkLabel = "Beheer cursus";
+            $linkAction = "inschrijvingen.php?id_course=" . $id_course;
         } else {
             if ($row["user_enrollments_count"]) {
-                // User is already enrolled in the course, show "Uitschrijven" button
-                $buttonLabel = "Uitschrijven";
-                $buttonDisabled = false;
+                // User is already enrolled in the course, show "Uitschrijven" link
+                $linkLabel = "Uitschrijven";
             } else {
                 // User is not enrolled in the course
                 if ($enrollments_count < $max_enrollments) {
-                    // Maximum enrollments limit not reached, show "Inschrijven" button
-                    $buttonLabel = "Inschrijven";
-                    $buttonDisabled = false;
+                    // Maximum enrollments limit not reached, show "Inschrijven" link
+                    $linkLabel = "Inschrijven";
                 } else {
-                    // Maximum enrollments limit reached, show disabled button
-                    $buttonLabel = "Max. inschrijvingen bereikt";
-                    $buttonDisabled = true;
+                    // Maximum enrollments limit reached, show disabled link
+                    $linkLabel = "Max. inschrijvingen bereikt";
                 }
             }
-            $buttonAction = "inschrijven-uitschrijven.php";
-        }        
+            $linkAction = "inschrijven-uitschrijven.php?id_course=" . $id_course;
+        }      
 
         $courseHTML = '
         <div class="row">
@@ -113,11 +109,7 @@ if ($result->num_rows > 0) {
                                 <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
                             </div>
                             <div class="col-md-3 text-center d-none d-lg-block">
-                                <form method="post" action="inschrijven-uitschrijven.php">
-                                    <input type="hidden" name="id_course" value="' . $id_course . '">
-                                    <input type="hidden" name="id_user" value="' . $id_user . '">
-                                    <button type="submit" class="btn btn-sm btn-primary" name="submit" ' . ($buttonDisabled ? "disabled" : "") . '>' . $buttonLabel . '</button>
-                                </form>
+                                <a href="' . $linkAction . '" class="btn btn-sm btn-primary' . ($linkLabel === "Max. inschrijvingen bereikt" ? " disabled" : "") . '">' . $linkLabel . '</a>
                             </div>
                         </div>
                     </div>

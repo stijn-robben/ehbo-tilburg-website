@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_POST['submit'])) {
+if (isset($_GET['id_course'])) {
     // Check if the user is logged in
     if (!isset($_SESSION['loggedin'])) {
         // User is not logged in, redirect to the login page
@@ -9,8 +9,8 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    // Get the values from POST data
-    $id_course = $_POST['id_course'];
+    // Get the values from GET data
+    $id_course = $_GET['id_course'];
     $id_user = $_SESSION['id_user'];
 
     // Connect to the database

@@ -75,7 +75,7 @@ if ($resultPart2->num_rows > 0) {
                             ' . $text . '
                         </p>
                         <div class="pt-4 pb-3">
-                            <a class="btn btn-secondary btn-lg" href="wie-zijn-wij.html" role="button">Meer weten</a>
+                            <a class="btn btn-secondary btn-lg" href="wie-zijn-wij.php" role="button">Meer weten</a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -104,7 +104,7 @@ if ($resultPart3->num_rows > 0) {
                         ' . $text . '
                     </p>
                     <div class="pt-4 pb-3">
-                        <a class="btn btn-primary btn-lg" href="account-aanvragen.html" role="button"
+                        <a class="btn btn-primary btn-lg" href="account-aanvragen.php" role="button"
                             >Account aanvragen</a
                         >
                     </div>
@@ -141,11 +141,6 @@ $conn->close();
 
     <!--Navbar-->
     <div id="navbar-placeholder"></div>
-
-    <!-- Ga terug button -->
-    <div class="d-none d-lg-block">
-        <a class="btn btn-secondary btn-lg go-back" onclick="goBack()" role="button"> Ga terug </a>
-    </div>
 
     <!-- Cursussen -->
     <?php echo $contentHTML; ?>

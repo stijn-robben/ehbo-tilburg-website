@@ -34,9 +34,9 @@ if (isset($_SESSION['role'])) {
         $eventQuery = "SELECT * FROM event WHERE id_event = $id_event";
         $eventResult = mysqli_query($conn, $eventQuery);
 
+        // Check for errors in the query execution
         if (!$eventResult) {
-            echo "Query error: " . mysqli_error($conn);
-            exit();
+            die("Error executing the query: " . mysqli_error($conn));
         }
 
         $eventName = '';
@@ -90,9 +90,9 @@ if (isset($_SESSION['role'])) {
 
         $result = mysqli_query($conn, $query);
 
+        // Check for errors in the query execution
         if (!$result) {
-            echo "Query error: " . mysqli_error($conn);
-            exit();
+            die("Error executing the query: " . mysqli_error($conn));
         }
 
         // Generate HTML for enrollments
@@ -128,6 +128,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="col-md-2">
                                         <form method="POST" action="">
                                             <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
+                                            <input type="hidden" name="id_event" value="' . $id_event . '">
                                             <input type="checkbox" id="checkbox" name="present" value="1" ' . $isChecked . '>
                                             <input type="submit" name="save" value="Opslaan">
                                         </form>
@@ -135,7 +136,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="col-md-2 text-center">
                                         <form action="" method="post" class="d-inline-block">
                                             <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
-                                            <button type="submit" name="verwijder" class="btn btn-sm btn-primary">Verwijder</button>
+                                            <button type="submit" name="delete" class="btn btn-sm btn-primary">Verwijder</button>
                                         </form>
                                     </div>
                                 </div>
@@ -148,13 +149,14 @@ if (isset($_SESSION['role'])) {
             }
         }
 
-        if (isset($_POST['verwijder'])) {
-            $id = $_POST['id_enrollment'];
+        if (isset($_POST['delete'])) {
+            $id_enrollment = $_POST['id_enrollment'];
+            $id_event = $_POST['id_event'];
 
             // Remove enrollment from the database
-            $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
+            $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id_enrollment";
             if (mysqli_query($conn, $deleteQuery)) {
-                header("Location: evenement-beheer.php");
+                header("Location: evenement-beheer.php?id_event=" . $id_event);
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);
@@ -162,13 +164,14 @@ if (isset($_SESSION['role'])) {
         }
 
         if (isset($_POST['save'])) {
-            $id = $_POST['id_enrollment'];
+            $id_enrollment = $_POST['id_enrollment'];
+            $id_event = $_POST['id_event'];
             $present = (isset($_POST['present']) && $_POST['present'] == '1') ? 1 : 0;
 
             // Update the 'present' value in the enrollment table
-            $updateQuery = "UPDATE enrollment SET present = $present WHERE id_enrollment = $id";
+            $updateQuery = "UPDATE enrollment SET present = $present WHERE id_enrollment = $id_enrollment";
             if (mysqli_query($conn, $updateQuery)) {
-                header("Location: evenement-beheer.php");
+                header("Location: evenement-beheer.php?id_event=" . $id_event);
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);

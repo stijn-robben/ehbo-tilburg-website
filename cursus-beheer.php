@@ -27,12 +27,17 @@ if (isset($_SESSION['role'])) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
             exit();
         }
-
+        
         $id_course = $_GET['id_course'];
 
         // Fetch course details from the database
         $courseQuery = "SELECT * FROM course WHERE id_course = $id_course";
         $courseResult = mysqli_query($conn, $courseQuery);
+
+        // Check for errors in the query execution
+        if (!$courseResult) {
+            die("Error executing the query: " . mysqli_error($conn));
+        }
 
         $courseDate = '';
         $courseSubject = '';
@@ -75,6 +80,11 @@ if (isset($_SESSION['role'])) {
 
         $result = mysqli_query($conn, $query);
 
+        // Check for errors in the query execution
+        if (!$result) {
+            die("Error executing the query: " . mysqli_error($conn));
+        }
+
         // Generate HTML for enrollments
         $enrollmentsHTML = "";
         if ($result->num_rows > 0) {
@@ -108,6 +118,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="col-md-2">
                                         <form method="POST" action="">
                                             <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
+                                            <input type="hidden" name="id_course" value="' . $id_course . '">
                                             <input type="checkbox" id="checkbox" name="present" value="1" ' . $isChecked . '>
                                             <input type="submit" name="save" value="Opslaan">
                                         </form>
@@ -115,7 +126,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="col-md-2 text-center">
                                         <form action="" method="post" class="d-inline-block">
                                             <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
-                                            <button type="submit" name="verwijder" class="btn btn-sm btn-primary">Verwijder</button>
+                                            <button type="submit" name="delete" class="btn btn-sm btn-primary">Verwijder</button>
                                         </form>
                                     </div>
                                 </div>
@@ -128,13 +139,14 @@ if (isset($_SESSION['role'])) {
             }
         }
 
-        if (isset($_POST['verwijder'])) {
-            $id = $_POST['id_enrollment'];
+        if (isset($_POST['delete'])) {
+            $id_enrollment = $_POST['id_enrollment'];
+            $id_course = $_POST['id_course'];
 
             // Remove enrollment from the database
-            $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id";
+            $deleteQuery = "DELETE FROM enrollment WHERE id_enrollment = $id_enrollment";
             if (mysqli_query($conn, $deleteQuery)) {
-                header("Location: cursus-beheer.php");
+                header("Location: cursus-beheer.php?id_course=" . $id_course);
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);
@@ -142,13 +154,14 @@ if (isset($_SESSION['role'])) {
         }
 
         if (isset($_POST['save'])) {
-            $id = $_POST['id_enrollment'];
+            $id_enrollment = $_POST['id_enrollment'];
+            $id_course = $_POST['id_course'];
             $present = (isset($_POST['present']) && $_POST['present'] == '1') ? 1 : 0;
 
             // Update the 'present' value in the enrollment table
-            $updateQuery = "UPDATE enrollment SET present = $present WHERE id_enrollment = $id";
+            $updateQuery = "UPDATE enrollment SET present = $present WHERE id_enrollment = $id_enrollment";
             if (mysqli_query($conn, $updateQuery)) {
-                header("Location: cursus-beheer.php");
+                header("Location: cursus-beheer.php?id_course=" . $id_course);
                 exit();
             } else {
                 echo "Error: " . mysqli_error($conn);

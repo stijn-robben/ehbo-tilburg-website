@@ -108,7 +108,7 @@ if ($result->num_rows > 0) {
                             <div class="col-md-2">
                                 <span class="card-text d-lg-none">Aantal inschrijvingen: </span><span class="card-text">' . $enrollments_text . '</span>
                             </div>
-                            <div class="col-md-3 text-center d-none d-lg-block">
+                            <div class="col-md-3 pt-2">
                                 <a href="' . $linkAction . '" class="btn btn-sm btn-primary' . ($linkLabel === "Maximum bereikt" ? " disabled" : "") . '">' . $linkLabel . '</a>
                             </div>
                         </div>

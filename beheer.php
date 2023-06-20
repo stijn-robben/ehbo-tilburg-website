@@ -219,11 +219,11 @@ if (isset($_SESSION['role'])) {
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label text-secondary" for="email">E-mail:</label>
-                                            <textarea id="email" class="form-control popup-form" name="email" rows="8" required></textarea><br /><br />
+                                            <input id="email" class="form-control popup-form" name="email" rows="8" required><br /><br />
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label text-secondary" for="text">Tekst:</label>
-                                            <input type="text" id="text" class="form-control popup-form" name="text" required /><br /><br />
+                                            <textarea type="text" id="text" class="form-control popup-form" name="text" required></textarea><br /><br />
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label text-secondary" for="img_url">Afbeeldings-URL:</label>

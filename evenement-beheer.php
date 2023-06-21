@@ -136,6 +136,7 @@ if (isset($_SESSION['role'])) {
                                     <div class="col-md-2 text-center">
                                         <form action="" method="post" class="d-inline-block">
                                             <input type="hidden" name="id_enrollment" value="' . $id_enrollment . '">
+                                            <input type="hidden" name="id_event" value="' . $id_event . '">
                                             <button type="submit" name="delete" class="btn btn-sm btn-primary">Verwijder</button>
                                         </form>
                                     </div>

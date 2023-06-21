@@ -101,7 +101,7 @@ if ($result->num_rows > 0) {
                             <div class="col-md-2">
                                 <span class="card-text d-lg-none">Eindtijd: </span><span class="card-text">' . $end_time . '</span>
                             </div>
-                            <div class="col-md-2 text-center d-none d-lg-block">
+                            <div class="col-md-2 pt-2">
                                 <a href="' . $linkAction . '" class="btn btn-sm btn-primary' . ($linkLabel === "Maximum bereikt" ? " disabled" : "") . '">' . $linkLabel . '</a>
                             </div>
                         </div>

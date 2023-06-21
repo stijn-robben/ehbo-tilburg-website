@@ -127,22 +127,22 @@ if (isset($_SESSION['role'])) {
                         </div>
                     </div>
 
-                    <!-- Content toevoegen button -->
-                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contentToevoegenModal">
-                        Content toevoegen
+                    <!-- Content aanpassen button -->
+                    <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contentAanpassenModal">
+                        Content aanpassen
                     </button>
 
-                    <!-- Modal Content toevoegen -->
-                    <div class="modal fade" id="contentToevoegenModal" tabindex="-1" aria-labelledby="contentToevoegenModalLabel" aria-hidden="true">
+                    <!-- Modal Content aanpassen -->
+                    <div class="modal fade" id="contentAanpassenModal" tabindex="-1" aria-labelledby="contentAanpassenModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-secondary" id="contentToevoegenModalLabel">Content beheren</h5>
+                                    <h5 class="modal-title text-secondary" id="contentAanpassenModalLabel">Content aanpassen</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- Content toevoegen form -->
-                                    <form id="" class="" action="content-beheren.php" method="POST" role="form">
+                                    <!-- Content aanpassen form -->
+                                    <form id="" class="" action="content-aanpassen.php" method="POST" role="form">
                                         <div class="form-group">
                                             <label class="form-label text-secondary" for="page">Pagina:</label>
                                             <select id="page" class="form-control popup-form" name="page" required>
